@@ -1,5 +1,7 @@
 # Book-a-meal-app
 
+[![Coverage Status](https://coveralls.io/repos/github/yomigeek/book-a-meal-app/badge.svg?branch=master)](https://coveralls.io/github/yomigeek/book-a-meal-app?branch=master)
+
 ## About Book-A-Meal Application
 An application that allows customers to make food orders and helps the food vendor provide and know what the customers want to eat.
 
