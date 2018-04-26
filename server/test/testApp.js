@@ -7,11 +7,7 @@ chai.use(chaiHttp);
 
 //Test meals API/functions
 describe('Meals API Tests', function() {
-   after(function (done) {
-        serve.close();
-        done();
-    });
-
+   
 
   before(() => console.log("Testing started"));
   after(() => console.log("Testing finished"));
@@ -259,10 +255,7 @@ it('should return meal does not exist on delete a SINGLE meal on /api/v1/meals/i
 // Test Menu API Functions
 
 describe('Menu API Tests', function() {
-  after(function (done) {
-        serve.close();
-        done();
-    });
+ 
    before(() => console.log("Testing started"));
   after(() => console.log("Testing finished"));
   
