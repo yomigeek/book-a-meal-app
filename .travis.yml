@@ -1,3 +1,4 @@
+sudo: required
 language: node_js
 node_js:
   - "node"
@@ -7,5 +8,4 @@ before_install:
 before_script:
   - npm install
 script:
-  - node app.js &
-  - npm test
+  - node app.js
