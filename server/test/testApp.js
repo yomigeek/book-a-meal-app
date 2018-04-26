@@ -10,10 +10,10 @@ chai.use(chaiHttp);
 describe('Meals API Tests', function() {
  
   before(() => console.log("Testing started"));
-  after( after(function (done) {
+  after(function (done) {
         servy.close();
         done();
-    }));
+    });
 
   it('should list ALL on /api/v1/meals GET', function(done) {
     chai.request(server)
@@ -260,10 +260,10 @@ it('should return meal does not exist on delete a SINGLE meal on /api/v1/meals/i
 describe('Menu API Tests', function() {
  
    before(() => console.log("Testing started"));
-  after(after(function (done) {
+  after(function (done) {
         servy.close();
         done();
-    }));
+    });
   
   it('should list ALL on /api/v1/menu GET', function(done) {
     chai.request(server)
@@ -378,10 +378,10 @@ it('should return error 409 if meal already added to the specific day menu on /a
 
 describe('Orders API Tests', function() {
  before(() => console.log("Testing started"));
-    after(after(function (done) {
+    after(function (done) {
         servy.close();
         done();
-    }));
+    });
 
 it('should list ALL on /api/v1/orders GET', function(done) {
     chai.request(server)
