@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
-let servy = require("../.servy");
+let servy = require("../servy");
 let request = require("supertest").agent(servy);
 const should = chai.should();
 chai.use(chaiHttp);
