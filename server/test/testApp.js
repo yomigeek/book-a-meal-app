@@ -1,8 +1,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
+const servers = require('../servers');
 const should = chai.should();
-const servers = require("../").servers;
 chai.use(chaiHttp);
 
 //Test meals API/functions
