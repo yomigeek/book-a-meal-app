@@ -1,0 +1,165 @@
+* { box-sizing: border-box; }
+html {
+    margin: 0px;
+    padding: 0px;
+} 
+
+body {
+  font: 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #404040;
+  background-image: url("../images/food2.jpg");
+  margin: 0px;
+    padding: 0px;
+}
+
+
+.displayLabel {
+  margin: 0 auto;
+  width: 300px;
+  padding: 4px;
+  border-radius: 8px;
+  color: #404040;
+  background-color: #fff;
+  font-weight: bold;
+}
+
+.applogo {
+
+   width:100px;
+  height:100px;
+  border-radius: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+.formLinkColor {
+
+    color: #1a73e8;
+
+}
+
+input[type="text"] , input[type="password"],  input[type="number"]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus,  input[type="number"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+.submitButton{
+
+    display: block;
+    width: 100%;
+    height: 42px;
+    margin-top: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #89ad05;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.previousButton{
+
+    display: block;
+    width: 300px;
+    height: 42px;
+    margin-top: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #89ad05;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#notifier {
+  display: none;
+  margin: 0 auto;
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+}
+#close {
+  display: none;
+}
+
+form {
+  margin: 0 auto;
+  width: 300px;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 8px;
+}
+
+.categoryPanel {
+    margin: 0 auto;
+    width: 300px;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+  }
+.categoryPanelHeader {
+
+    font-size: 13px;
+    text-align: center;
+    font-weight: bold;
+  }
+.categorySelectors{
+    
+   
+        display: block;
+        width: 100%;
+        height: 42px;
+        margin-top: 25px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        text-shadow: 0 1px rgba(white, 0.5);
+        background: #89ad05;
+        border: 1px solid;
+        border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+        border-radius: 2px;
+        cursor: pointer;
+ 
+}
+
+button {
+  display: block;
+  width: 100%;
+  height: 42px;
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #494d59;
+  text-align: center;
+  text-shadow: 0 1px rgba(white, 0.5);
+  background: #fcfcfc;
+  border: 1px solid;
+  border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#header {
+  margin: 0 auto;
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ce0b10;
+  color: #f4f4f4;
+}
