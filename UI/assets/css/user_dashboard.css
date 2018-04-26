@@ -1,0 +1,705 @@
+* { box-sizing: border-box; }
+html {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+} 
+
+body {
+    font: 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #404040;
+    background-color: #fff;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    
+  }
+
+  #navheader {
+    background-color: #fff;
+    color: #fff;
+    /* background-color: #ce0b10; */
+    padding: 2px 0px 15px 0px;
+    font-size: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 120px 0 rgba(0, 0, 0, 0.19);
+    background-image: url("../images/food2.jpg");
+    height:  300px;
+    font-weight: bold;
+
+    
+  }
+ 
+  .merchantDashboardMenu {
+
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .dashboardTitle{
+
+        font: 17px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        text-align: center;
+
+  }
+  #walletHeader {
+    margin: 10 auto;
+    width: 300px;
+    border-radius: 8px;
+    background-color: #89ad05;
+    color: #f4f4f4;
+    padding: 10px 5px 5px 5px;
+  
+  }
+  .walletTitle{
+
+    font: 17px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+
+}
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 200px;
+    margin-left: 200px;
+    align-items: center;     
+
+  }
+
+    @media (max-width: 400px) {
+   .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 50%;
+    margin-left: 50%;
+    align-items: center;     
+
+  }
+
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+   .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 10%;
+    margin-left: 10%;
+    align-items: center;     
+
+  }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+ .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 25%;
+    margin-left: 25%;
+    align-items: center;     
+
+  }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+   .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 10%;
+    margin-left: 10%;
+    align-items: center;     
+
+  }
+}
+/**********
+iPad 3
+**********/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+/* Styles */
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+/* Styles */
+}
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+/* Styles */
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+/* Styles */
+}
+
+/* iPhone 5 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+/* iPhone 6 ----------- */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+/* iPhone 6+ ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+/* Samsung Galaxy S3 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+/* Samsung Galaxy S4 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+/* Styles */
+ .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 10%;
+    margin-left: 10%;
+    align-items: center;     
+
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+/* Styles */
+   .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 10%;
+    margin-left: 10%;
+    align-items: center;     
+
+  }
+}
+
+/* Samsung Galaxy S5 ----------- */
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+/* Styles */
+ .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-right: 5%;
+    margin-left: 5%;
+    align-items: center;     
+
+  }
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+/* Styles */
+}
+
+  
+  .flex-container > div {
+    background-color: #f1f1f1;
+    width: 250px;
+    margin: 30px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    align-content: center;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius:10px;
+    flex-shrink: 2;
+    border-radius: 10%;
+    background-color: #fff;
+
+  }
+
+
+  .add-a-meal-form {
+
+  
+        margin: 0 auto;
+        width: 300px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+      
+  }
+
+    .edit-a-meal-form {
+
+  
+        margin: 0 auto;
+        width: 320px;
+        padding: 10px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+      
+  }
+
+   .add-a-menu-form {
+
+  
+        margin: 0 auto;
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19);
+        
+      
+  }
+
+  iframe{
+
+        margin: 0 auto;
+        width: 330px;
+        padding: 10px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+      
+  }
+
+  input[type="text"] , input[type="password"],  input[type="number"],select, input[type="file"]{
+    display: inline-block;
+    border: none;
+    background: #f5f6f8;
+    width: 100%;
+    height: 42px;
+    margin-top: 25px;
+    border: 1px #ddd solid;
+  }
+
+  textarea{
+    display: inline-block;
+    border: none;
+    background: #f5f6f8;
+    width: 100%;
+    margin-top: 25px;
+    border: 1px #ddd solid;
+    color: #404040;
+  }
+
+  input[type="date"] {
+    display: inline-block;
+    border: none;
+    background: #f5f6f8;
+    width: 200px;
+    height: 32px;
+    margin-top: 25px;
+    border: 1px #ddd solid;
+  }
+
+  .dateSortButton  {
+    width: 150px;
+    height: 32px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #89ad05;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  textarea:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  input[type="text"]:focus, input[type="password"]:focus,  input[type="number"]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  .add-meal-button{
+
+    display: block;
+    width: 100%;
+    height: 42px;
+    margin-top: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #89ad05;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+  .add-menu-button{
+
+    display: block;
+    width: 60%;
+    height: 42px;
+    margin-top: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #89ad05;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#header {
+    margin: 10 auto;
+    width: 300px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ce0b10;
+    color: #f4f4f4;
+  }
+  .button{
+
+    display: block;
+    width: 250px;
+    height: 42px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #fff;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 45px;
+    cursor: pointer;
+  }
+
+  .button2{
+
+    display: block;
+    width: 150px;
+    height: 42px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #89ad05;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+
+    .dashboardPanel{
+
+    display: block;
+    width: 300px;
+    height: 42px;
+    margin-top: 115px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #ce0b10;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 20px 0px 30px 0px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+}
+
+  /* The grid container */
+.grid-container {
+    display: grid;
+    grid-template-areas: 
+    'header header header header header header' 
+    'left left middle middle right right' 
+    'footer footer footer footer footer footer';
+    /* grid-column-gap: 10px; - if you want gap between the columns */
+    grid-gap: 20px;
+    justify-content: space-evenly;
+  } 
+  
+  .left,
+  .middle,
+  .right {
+    padding: 10px;
+  }
+  
+  /* Style the left column */
+  .left {
+    grid-area: left;
+  }
+  
+  /* Style the middle column */
+  .middle {
+    grid-area: middle;
+  }
+  
+  /* Style the right column */
+  .right {
+    grid-area: right;
+  }
+  
+  /* Style the footer */
+  .footer {
+    grid-area: footer;
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  @media (max-width: 400px) {
+    .grid-container  {
+      grid-template-areas: 
+      'header header header header header header' 
+      'left left left left left left' 
+      'middle middle middle middle middle middle' 
+      'right right right right right right' 
+      'footer footer footer footer footer footer';
+  }
+
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.menu-list { 
+  margin: 0 auto;
+  width: 80%;
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.menu-list > div {
+
+  display: block;
+  width: 100%;
+  height: 62px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #494d59;
+  text-align: left;
+  text-shadow: 0 1px rgba(white, 0.5);
+  border: none;
+  border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 7px;
+}
+
+
+.menu-days-list { 
+  margin: 0 auto;
+  width: 80%;
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.menu-days-list > div {
+
+  display: block;
+  width: 100%;
+  height: 62px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #494d59;
+  text-align: left;
+  text-shadow: 0 1px rgba(white, 0.5);
+  border: none;
+  border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: white;
+  padding: 5px 10px 70px 20px;
+  margin-bottom: 7px;
+}
+
+.meal-list { 
+  margin: 0 auto;
+  width: 80%;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-size: 13px;
+  overflow-wrap: inherit;
+  padding-bottom: 1px; 
+  padding-top: 1px;
+  padding-left: 1px;
+  padding-right: 1px;
+  /* display: none; */
+
+}
+
+.meal-list > div { 
+  background: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px; 
+  border-bottom: 1px solid;
+  border-bottom-color: #ce0b10;
+
+}
+.orderDateForm { 
+  margin: 0 auto;
+  width: 80%;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-size: 12px;
+  padding-bottom: 11px; 
+  padding-top: 1px;
+  padding-left: 1px;
+  padding-right: 1px;
+
+}
+
+
+.button4{
+
+  display: block;
+  width: 150px;
+  height: 42px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px rgba(white, 0.5);
+  background: #6ad809;
+  border: 1px solid;
+  border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.earnings-list { 
+  margin: 0 auto;
+  width: 80%;
+  padding: 25px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.earnings-list > div {
+
+  display: block;
+  width: 100%;
+  height: 62px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #494d59;
+  text-align: left;
+  text-shadow: 0 1px rgba(white, 0.5);
+  border: none;
+  border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 7px;
+}
+
+.dashboardMenuImages {
+
+  width: 80px;
+  height: 80px;
+}
+
+.profilePhoto {
+
+  width: 75px;
+  height: 75px;
+  align-content:center;
+  border-radius:100%;
+}

@@ -1,0 +1,172 @@
+* {
+    box-sizing: border-box;
+}
+html {
+    margin: 0px;
+    padding: 0px;
+} 
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+margin: 0px;
+    padding: 0px;
+}
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 90px 0px 190px 0px;
+    text-align: center;
+    font-size: 30px;
+    color: #ce0b10;
+    background-image: url("../images/food2.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+
+/* Container for flexboxes */
+
+.row {
+    display: -webkit-flex;
+    display: flex;
+}
+
+a{
+    text-decoration: none;
+}
+/* Create three equal columns that sits next to each other */
+.column {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 5px;
+    height: 270px; 
+    background-color: #fff;
+
+}
+.titleHeaders{
+
+       font: 17px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        color: #ce0b10
+
+}
+/* Style the footer */
+.footer {
+    background-color: #000;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+}
+.meal-list { 
+    margin: 0 auto;
+    width:70%;
+    background: #f4f4f4;
+    border-radius: 8px;
+    font-size: 13px;
+    overflow-wrap: inherit;
+    padding-bottom: 1px; 
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    /* display: none; */
+  
+  }
+
+  .meal-list > div { 
+    background: #fff;
+    border-radius: 8px;
+    font-size: 13px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px; 
+    border-bottom: 1px solid;
+    border-bottom-color: #ce0b10;
+  
+  }
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .row {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+    .header {
+    background-color: #f1f1f1;
+    padding: 40px 0px 60px 0px;
+    text-align: center;
+    font-size: 19px;
+    color: #fff;
+    background-image: url("../images/food.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 120px 0 rgba(0, 0, 0, 0.19);
+
+}
+}
+
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #ce0b10;
+}
+
+/* Style the topnav links */
+.topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px 8px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+ .button2{
+
+    display: block;
+    width: 150px;
+    height: 42px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #81a821;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+
+  .button4{
+
+    display: block;
+    width: 150px;
+    height: 42px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px rgba(white, 0.5);
+    background: #81a821;
+    border: 1px solid;
+    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+  .copyWriteColumn {
+
+       display: block;
+    width: 150px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #81a821;
+    text-align: center;
+   
+  }
