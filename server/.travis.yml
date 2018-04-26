@@ -1,13 +1,9 @@
-sudo: false
 language: node_js
 node_js:
   - "node"
   - "8"
-before_install: 
-  - cd server
 before_script:
   - npm install
-  - npm install supertest 
 script:
   - node app.js &
-  - npm test
+- npm test
