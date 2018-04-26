@@ -4,7 +4,7 @@
   "description": "book a meal app",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --exit",
+    "test": "mocha testApp.js --timeout 5000 --exit",
     "build": "rimraf dist/ && babel ./ -- out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js"
   },
