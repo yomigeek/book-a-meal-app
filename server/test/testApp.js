@@ -13,7 +13,7 @@ describe('Meals API Tests', function() {
   after( after(function (done) {
         servy.close();
         done();
-    }), () => console.log("Testing finished"));
+    }));
 
   it('should list ALL on /api/v1/meals GET', function(done) {
     chai.request(server)
@@ -263,7 +263,7 @@ describe('Menu API Tests', function() {
   after(after(function (done) {
         servy.close();
         done();
-    }), () => console.log("Testing finished"));
+    }));
   
   it('should list ALL on /api/v1/menu GET', function(done) {
     chai.request(server)
@@ -381,7 +381,7 @@ describe('Orders API Tests', function() {
     after(after(function (done) {
         servy.close();
         done();
-    }), () => console.log("Testing finished"));
+    }));
 
 it('should list ALL on /api/v1/orders GET', function(done) {
     chai.request(server)
