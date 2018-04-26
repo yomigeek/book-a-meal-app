@@ -8,6 +8,7 @@ before_install:
 before_script:
   - npm install
   - npm install nodemon
+  - npm install express
 script:
-  - nodemon app.js
+  - node app.js
   - npm test
