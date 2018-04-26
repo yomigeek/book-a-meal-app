@@ -1,5 +1,7 @@
 # Book-a-meal-app
 
+[![Build Status](https://travis-ci.org/yomigeek/book-a-meal-app.svg?branch=feature)](https://travis-ci.org/yomigeek/book-a-meal-app)
+
 [![Coverage Status](https://coveralls.io/repos/github/yomigeek/book-a-meal-app/badge.svg?branch=master)](https://coveralls.io/github/yomigeek/book-a-meal-app?branch=master)
 
 ## About Book-A-Meal Application
