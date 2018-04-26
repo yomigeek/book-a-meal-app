@@ -371,10 +371,8 @@ it('should return error 409 if meal already added to the specific day menu on /a
 
 describe('Orders API Tests', function() {
  before(() => console.log("Testing started"));
-  after(function (done) {
-        serve.close();
-        done();
-    });
+    after(() => console.log("Testing finished"));
+
 it('should list ALL on /api/v1/orders GET', function(done) {
     chai.request(server)
         .get('/api/v1/orders')
