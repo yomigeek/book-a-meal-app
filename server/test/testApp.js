@@ -311,25 +311,6 @@ it('should return 404 error if specific day has no menu on /api/v1/menu/id GET' 
     });
 });
 
-it('should add a SINGLE meal to the menu on a specific day on /api/v1/menu POST' , function(done) {
-    chai.request(server)
-        .post('/api/v1/menu/')
-        .send({'mealName':'pancake', 'dayOfWeek':7, 'price':2})
-        .end(function(err, res){
-          res.should.have.status(200);
-          res.should.be.json;
-          res.body.should.be.a('object');
-          res.body.menuSingular.should.have.property('id');
-          res.body.menuSingular.should.have.property('mealName');
-          res.body.menuSingular.should.have.property('price');
-          res.body.menuSingular.should.have.property('dayOfWeek');
-          res.body.message.should.equal('success');
-
-
-        done();
-      });     
-});
-
 it('should return error 400 if specific day is missing from SINGLE meal parameter to menu on /api/v1/menu POST' , function(done) {
     chai.request(server)
         .post('/api/v1/menu/')
