@@ -3,7 +3,6 @@ const chaiHttp = require('chai-http');
 const server = require('../app');
 const should = chai.should();
 const servers = require("../").servers;
-const request = require("supertest").agent(servers);
 chai.use(chaiHttp);
 
 //Test meals API/functions
