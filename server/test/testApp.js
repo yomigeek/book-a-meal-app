@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
-let servy = require("../").servy;
+let servy = require("../.servy");
 let request = require("supertest").agent(servy);
 const should = chai.should();
 chai.use(chaiHttp);
@@ -16,7 +16,7 @@ describe('Meals API Tests', function() {
     });
 
   it('should list ALL on /api/v1/meals GET', function(done) {
-    chai.request(server)
+    request(server)
         .get('/api/v1/meals')
         .end(function(err, res){
         res.should.have.status(200);
