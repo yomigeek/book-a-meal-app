@@ -7,8 +7,6 @@ before_install:
   - cd server
 before_script:
   - npm install
-  - npm install nodemon
-  - npm install express
 script:
   - node app.js
   - npm test
