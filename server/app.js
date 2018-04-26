@@ -6,8 +6,6 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 app.use(require('./routes/index'));
-let servy = app.listen(port);
-console.log('Server started on port 3000');
+console.log(port, () => {console.log('Server started on port 3000')});
 
 module.exports = app;
-module.exports = servy;
