@@ -8,6 +8,7 @@ before_install:
 before_script:
   - npm install
   - npm install supertest 
+  - npm install --save-dev coveralls mocha-lcov-reporter
 script:
   - node app.js &
   - npm test
