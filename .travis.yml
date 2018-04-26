@@ -12,3 +12,5 @@ before_script:
 script:
   - node app.js &
   - npm test
+after_success:
+  - npm run coveralls
