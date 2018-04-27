@@ -17,7 +17,7 @@ before_script:
 script:
   - node app.js &
   - npm test
-  - nyc --reporter=lcov yarn run unit
+  - nyc --reporter=lcov yarn run test
 
 after_success:
   - npm run coveralls
