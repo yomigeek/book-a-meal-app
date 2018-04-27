@@ -11,8 +11,7 @@
     "test": "set NODE_ENV=test&&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/testApp.js --exit",
     "build": "rimraf dist/ && babel ./ -- out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "cover": "coveralls cover _mocha --exit"
+    "coveralls": "npm run cat ./coverage/lcov.info | coveralls",
   },
   "dependencies": {
     "body-parser": "*",
