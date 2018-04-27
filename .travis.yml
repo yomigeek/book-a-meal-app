@@ -22,4 +22,4 @@ script:
 
 after_success:
   - npm run coveralls
-    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
