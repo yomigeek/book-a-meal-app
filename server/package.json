@@ -12,7 +12,7 @@
     "build": "rimraf dist/ && babel ./ -- out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "cover": "istanbul cover _mocha --exit"
+    "cover": "coveralls cover _mocha --exit"
   },
   "dependencies": {
     "body-parser": "*",
