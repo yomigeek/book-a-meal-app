@@ -11,6 +11,7 @@ before_script:
   - npm install mocha-lcov-reporter --save-dev
   - npm install supertest 
   - yarn global add nyc
+  - chmod 0777 ./node_modules/.bin/mocha
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
@@ -21,5 +22,5 @@ script:
 
 after_success:
   - npm run coveralls
-  - ./cc-test-reporter format-coverage --input-type codeclimate.$SUITE.json -output $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
