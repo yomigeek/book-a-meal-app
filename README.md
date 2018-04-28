@@ -36,6 +36,7 @@ NodeJS (Express Framework)
   <li>The Homepage - to navigate around the application</li>
   <li>The Login - to access the features made available to them </li>
   <li>The dashboard contains the features for the vendors such as caterers, these include: 
+    <br />
     Add a meal - to add a meal as a vendor
     <br />
     Meal list - Avaialble added meals for creating daily menu
