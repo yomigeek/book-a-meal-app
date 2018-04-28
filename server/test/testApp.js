@@ -56,11 +56,12 @@ it('should add a SINGLE meal on /api/v1/meals POST' , function(done) {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
-          res.body.should.have.property('id');
-          res.body.should.have.property('name');
-          res.body.should.have.property('price');
-          res.body.should.have.property('photoDir');
-          res.body.should.have.property('mealId');
+          res.body.meal.should.have.property('id');
+          res.body.meal.should.have.property('name');
+          res.body.meal.should.have.property('price');
+          res.body.meal.should.have.property('photoDir');
+          res.body.meal.should.have.property('mealId');
+          res.body.message.should.equal('success');
 
         done();
       });
