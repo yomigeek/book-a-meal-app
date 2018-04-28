@@ -18,7 +18,7 @@ NodeJS (Express Framework)
 ## Customers
 <ul>
   <li>
-    Customer(Individual) dashboard contains
+    Customer(Individual) dashboard contains:
     <br />
     List of meal for specific days
     <br />
@@ -35,7 +35,7 @@ NodeJS (Express Framework)
 <ul>
   <li>The Homepage - to navigate around the application</li>
   <li>The Login - to access the features made available to them </li>
-  <li>The dashboard contains the features for the vendors such as caterers, these include: 
+  <li>The dashboard contains the features for the vendors, these include: 
     <br />
     Add a meal - to add a meal as a vendor
     <br />
