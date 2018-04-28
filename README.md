@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/yomigeek/book-a-meal-app.svg?branch=test-develop)](https://travis-ci.org/yomigeek/book-a-meal-app)
 
-[![Coverage Status](https://coveralls.io/repos/github/yomigeek/book-a-meal-app/badge.svg?branch=test-develop)](https://coveralls.io/github/yomigeek/book-a-meal-app?branch=test-develop)
+[![Coverage Status](https://coveralls.io/repos/github/yomigeek/book-a-meal-app/badge.svg?branch=test-develop)](https://coveralls.io/github/yomigeek/book-a-meal-app?branch=test-develop)  [![Test Coverage](https://api.codeclimate.com/v1/badges/830debbd00f194ec0e5c/test_coverage)](https://codeclimate.com/github/yomigeek/book-a-meal-app/test_coverage)
 ========
 
 ## About Book-A-Meal Application
