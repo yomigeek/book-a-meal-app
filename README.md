@@ -14,7 +14,7 @@ NodeJS (Express Framework)
 
 
 ## Features
-<hr />
+
 ## Customers
 <ul>
   <li>
@@ -29,6 +29,7 @@ NodeJS (Express Framework)
     Log out link 
     <br />
   </li>
+</ul>
 
 ## Vendors (Caterers)
 <ul>
@@ -47,6 +48,7 @@ NodeJS (Express Framework)
     <br />
     Orders - summary of the daily orders - approved, pending and cancelled. 
   </li>
+</ul>
   
 ## Author 
 Abayomi Olaoye
