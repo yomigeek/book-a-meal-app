@@ -1,6 +1,5 @@
 
 const meals = ([
-
     {
         id: 1,
         name: "semo",
@@ -14,7 +13,7 @@ const meals = ([
         price: "400",
         photoDir: "./meals_photo/3456.jpg",
         mealId: "78v"
-    }
+    },
 
 ]);
 
@@ -80,11 +79,17 @@ exports.addAMeal= function(req, res) {
         name: req.body.name,
         price: req.body.price,
         photoDir: req.body.photoDir,
-        mealId: Math.floor(Math.random() * 200000)
+        mealId: Math.floor(Math.random() * 200000),
     });
 
     meals.push(meal);
-    return res.send(meal);
+    return res.send({
+        
+        statusCode: '200',
+        message:'success',
+        meal,
+           
+        });
 
 }
 
@@ -167,4 +172,3 @@ exports.deleteMeal = function(req, res){
     });
 
 }
-
