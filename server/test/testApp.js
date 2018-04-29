@@ -2,7 +2,7 @@ const chai = require('chai');
 
 const chaiHttp = require('chai-http');
 
-const server = require('../app').default;
+const server = require('../app');
 
 const should = chai.should();
 
@@ -10,6 +10,10 @@ chai.use(chaiHttp);
 
 // Test meals API/functions
 describe('Meals API Tests', () => {
+  
+  before(() => console.log("Testing started"));
+  after(() => console.log("Testing finished!"));
+  
   it('should list ALL on /api/v1/meals GET', (done) => {
     chai.request(server)
       .get('/api/v1/meals')
@@ -230,6 +234,10 @@ describe('Meals API Tests', () => {
 // Test Menu API Functions
 
 describe('Menu API Tests', () => {
+  
+  before(() => console.log("Testing started"));
+  after(() => console.log("Testing finished!"));
+  
   it('should list ALL on /api/v1/menu GET', (done) => {
     chai.request(server)
       .get('/api/v1/menu')
@@ -338,6 +346,10 @@ describe('Menu API Tests', () => {
 // Tests for Orders API Functions
 
 describe('Orders API Tests', () => {
+  
+  before(() => console.log("Testing started"));
+  after(() => console.log("Testing finished!"));
+  
   it('should list ALL on /api/v1/orders GET', (done) => {
     chai.request(server)
       .get('/api/v1/orders')
