@@ -4,16 +4,11 @@
   "description": "book a meal app",
   "main": "app.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "mocha --exit",
-    "build": "rimraf dist/ && babel ./ -- out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "npm run build && node dist/app.js"
-=======
-     "test": "set NODE_ENV=test&&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/testApp.js --exit",
+
+    "test": "set NODE_ENV=test&&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/testApp.js --exit",
     "build": "rimraf dist/ && babel ./ -- out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
->>>>>>> 16a8d644d22994603c9c691b0c46f7f711c84eba
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -35,10 +30,7 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-<<<<<<< HEAD
-=======
    "istanbul": "^0.4.5",
->>>>>>> 16a8d644d22994603c9c691b0c46f7f711c84eba
     "mocha": "^5.1.1",
     "request": "^2.85.0",
     "rimraf": "^2.6.2",

@@ -360,7 +360,6 @@ iPad 3
     text-shadow: 0 1px rgba(white, 0.5);
     background: #89ad05;
     border: 1px solid;
-    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
     border-radius: 2px;
     cursor: pointer;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -389,7 +388,6 @@ iPad 3
     text-shadow: 0 1px rgba(white, 0.5);
     background: #89ad05;
     border: 1px solid;
-    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
     border-radius: 2px;
     cursor: pointer;
 }
@@ -407,7 +405,6 @@ iPad 3
     text-shadow: 0 1px rgba(white, 0.5);
     background: #89ad05;
     border: 1px solid;
-    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
     border-radius: 2px;
     cursor: pointer;
 }
@@ -432,9 +429,7 @@ iPad 3
     text-align: center;
     text-shadow: 0 1px rgba(white, 0.5);
     background: #fff;
-    border: 1px solid
-    ;
-    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    border: 1px solid;
     border-radius: 45px;
     cursor: pointer;
   }
@@ -452,7 +447,6 @@ iPad 3
     text-shadow: 0 1px rgba(white, 0.5);
     background: #89ad05;
     border: 1px solid;
-    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
     border-radius: 25px;
     cursor: pointer;
   }
