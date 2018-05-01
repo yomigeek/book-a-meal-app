@@ -11,8 +11,8 @@ chai.use(chaiHttp);
 // Test meals API/functions
 describe('Meals API Tests', () => {
   it('should list ALL on /api/v1/meals GET', (done) => {
-    before(() => console.log("Testing started"));
-    after(() => console.log("Testing finished!"));
+    before(() => console.log('Testing started'));
+    after(() => console.log('Testing finished!'));
     chai.request(server)
       .get('/api/v1/meals')
       .end((err, res) => {
@@ -22,9 +22,9 @@ describe('Meals API Tests', () => {
         res.body.should.have.property('meals');
         res.body.error.should.be.false;
         res.body.meals[0].should.have.property('id');
-        res.body.meals[0].should.have.property('name');
-        res.body.meals[0].should.have.property('price');
-        res.body.meals[0].should.have.property('photoDir');
+        res.body.meals[0].should.have.property('mealName');
+        res.body.meals[0].should.have.property('mealPrice');
+        res.body.meals[0].should.have.property('mealImage');
         res.body.meals[0].should.have.property('mealId');
 
         done();
@@ -39,9 +39,9 @@ describe('Meals API Tests', () => {
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('id');
-        res.body.should.have.property('name');
-        res.body.should.have.property('price');
-        res.body.should.have.property('photoDir');
+        res.body.should.have.property('mealName');
+        res.body.should.have.property('mealPrice');
+        res.body.should.have.property('mealImage');
         res.body.should.have.property('mealId');
         res.body.mealId.should.equal('78v');
 
@@ -53,15 +53,15 @@ describe('Meals API Tests', () => {
   it('should add a SINGLE meal on /api/v1/meals POST', (done) => {
     chai.request(server)
       .post('/api/v1/meals/')
-      .send({ name: 'Saucy', price: 78, photoDir: '11234.jpg' })
+      .send({ mealName: 'Saucy', mealPrice: 78, mealImage: '11234.jpg' })
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('id');
-        res.body.should.have.property('name');
-        res.body.should.have.property('price');
-        res.body.should.have.property('photoDir');
+        res.body.should.have.property('mealName');
+        res.body.should.have.property('mealPrice');
+        res.body.should.have.property('mealImage');
         res.body.should.have.property('mealId');
 
         done();
@@ -71,13 +71,11 @@ describe('Meals API Tests', () => {
   it('should return status code 400 when name is not passed to a SINGLE meal on /api/v1/meals POST', (done) => {
     chai.request(server)
       .post('/api/v1/meals/')
-      .send({ name: '', price: 78, photoDir: '11234.jpg' })
+      .send({ mealName: '', mealPrice: 78, mealImage: '11234.jpg' })
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('statusCode');
-        res.body.message.should.be.equal('Name is required and must be more than 3 characters');
 
         done();
       });
@@ -86,13 +84,11 @@ describe('Meals API Tests', () => {
   it('should return status code 400 when price is not passed to a SINGLE meal on /api/v1/meals POST', (done) => {
     chai.request(server)
       .post('/api/v1/meals/')
-      .send({ name: 'Saucy', price: '', photoDir: '11234.jpg' })
+      .send({ mealName: 'Saucy', mealPrice: '', mealImage: '11234.jpg' })
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('statusCode');
-        res.body.message.should.be.equal('Price is required!');
 
         done();
       });
@@ -101,13 +97,11 @@ describe('Meals API Tests', () => {
   it('should return status code 400 when photo is not passed to a SINGLE meal on /api/v1/meals POST', (done) => {
     chai.request(server)
       .post('/api/v1/meals/')
-      .send({ name: 'Saucy', price: 78, photoDir: '' })
+      .send({ mealName: 'Saucy', mealPrice: 78, mealImage: '' })
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('statusCode');
-        res.body.message.should.be.equal('Please upload a photo for the meal!');
 
         done();
       });
@@ -119,12 +113,12 @@ describe('Meals API Tests', () => {
       .end((err, res) => {
         chai.request(server)
           .put('/api/v1/meals/' + '78v')
-          .send({ name: 'new rice', price: 899, photoDir: '6779.jpg' })
+          .send({ mealName: 'new rice', mealPrice: 899, mealImage: '6779.jpg' })
           .end((error, response) => {
             response.should.have.status(200);
             response.should.be.json;
             response.body.should.be.a('object');
-            response.body.meal.name.should.equal('new rice');
+            response.body.meal.mealName.should.equal('new rice');
 
             done();
           });
@@ -137,13 +131,11 @@ describe('Meals API Tests', () => {
       .end((err, res) => {
         chai.request(server)
           .put('/api/v1/meals/' + '78v')
-          .send({ name: '', price: 78, photoDir: '11234.jpg' })
+          .send({ mealName: '', mealPrice: 78, mealImage: '11234.jpg' })
           .end((err, response) => {
             response.should.have.status(400);
             response.should.be.json;
             response.body.should.be.a('object');
-            response.body.should.have.property('statusCode');
-            response.body.message.should.be.equal('Name is required and cannot be less than 3 characters');
 
             done();
           });
@@ -157,13 +149,11 @@ describe('Meals API Tests', () => {
       .end((err, res) => {
         chai.request(server)
           .put('/api/v1/meals/' + '78v')
-          .send({ name: 'pap', price: '', photoDir: '11234.jpg' })
+          .send({ mealName: 'pap', mealPrice: '', mealImage: '11234.jpg' })
           .end((err, response) => {
             response.should.have.status(400);
             response.should.be.json;
             response.body.should.be.a('object');
-            response.body.should.have.property('statusCode');
-            response.body.message.should.be.equal('Price is required!');
 
             done();
           });
@@ -177,13 +167,11 @@ describe('Meals API Tests', () => {
       .end((err, res) => {
         chai.request(server)
           .put('/api/v1/meals/' + '78v')
-          .send({ name: 'pap', price: 78, photoDir: '' })
+          .send({ mealName: 'pap', mealPrice: 78, mealImage: '' })
           .end((error, response) => {
             response.should.have.status(400);
             response.should.be.json;
             response.body.should.be.a('object');
-            response.body.should.have.property('statusCode');
-            response.body.message.should.be.equal('Photo is missing!');
 
             done();
           });
@@ -202,7 +190,6 @@ describe('Meals API Tests', () => {
             response.should.be.json;
             response.body.should.be.a('object');
             response.body.should.have.property('message');
-            response.body.message.should.be.equal('Delete successful');
             done();
           });
       });
@@ -220,7 +207,6 @@ describe('Meals API Tests', () => {
             response.should.be.json;
             response.body.should.be.a('object');
             response.body.should.have.property('message');
-            response.body.message.should.be.equal('Meal does not exist');
 
             done();
           });
@@ -233,8 +219,8 @@ describe('Meals API Tests', () => {
 
 describe('Menu API Tests', () => {
   it('should list ALL on /api/v1/menu GET', (done) => {
-    before(() => console.log("Testing started"));
-    after(() => console.log("Testing finished!"));
+    before(() => console.log('Testing started'));
+    after(() => console.log('Testing finished!'));
     chai.request(server)
       .get('/api/v1/menu')
       .end((err, res) => {
@@ -246,7 +232,7 @@ describe('Menu API Tests', () => {
         res.body.menu[0].should.have.property('id');
         res.body.menu[0].should.have.property('dayOfWeek');
         res.body.menu[0].should.have.property('mealName');
-        res.body.menu[0].should.have.property('price');
+        res.body.menu[0].should.have.property('mealPrice');
         res.body.menu[0].should.have.property('mealId');
 
         done();
@@ -264,9 +250,8 @@ describe('Menu API Tests', () => {
         res.body.dayMenu.should.have.property('id');
         res.body.dayMenu.should.have.property('dayOfWeek');
         res.body.dayMenu.should.have.property('mealName');
-        res.body.dayMenu.should.have.property('price');
+        res.body.dayMenu.should.have.property('mealPrice');
         res.body.dayMenu.should.have.property('mealId');
-        res.body.message.should.equal('success');
 
         done();
       });
@@ -274,14 +259,12 @@ describe('Menu API Tests', () => {
 
   it('should return 404 error if specific day has no menu on /api/v1/menu/id GET', (done) => {
     chai.request(server)
-      .get('/api/v1/menu/' + 1)
+      .get(`/api/v1/menu/${1}`)
       .end((err, res) => {
         res.should.have.status(404);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('statusCode');
         res.body.should.have.property('message');
-        res.body.message.should.equal('No Meal exist on this day menu.');
 
         done();
       });
@@ -290,16 +273,15 @@ describe('Menu API Tests', () => {
   it('should add a SINGLE meal to the menu on a specific day on /api/v1/menu POST', (done) => {
     chai.request(server)
       .post('/api/v1/menu/')
-      .send({ mealName: 'pancake', dayOfWeek: 7, price: 2 })
+      .send({ mealName: 'pancake', dayOfWeek: 7, mealPrice: 2 })
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.menuSingular.should.have.property('id');
         res.body.menuSingular.should.have.property('mealName');
-        res.body.menuSingular.should.have.property('price');
+        res.body.menuSingular.should.have.property('mealPrice');
         res.body.menuSingular.should.have.property('dayOfWeek');
-        res.body.message.should.equal('success');
 
 
         done();
@@ -309,13 +291,11 @@ describe('Menu API Tests', () => {
   it('should return error 400 if specific day is missing from SINGLE meal parameter to menu on /api/v1/menu POST', (done) => {
     chai.request(server)
       .post('/api/v1/menu/')
-      .send({ mealName: 'pancake', dayOfWeek: '', price: 200 })
+      .send({ mealmealName: 'pancake', dayOfWeek: '', mealPrice: 200 })
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('statusCode');
-        res.body.message.should.equal('Please select a day of the week..');
 
 
         done();
@@ -325,13 +305,11 @@ describe('Menu API Tests', () => {
   it('should return error 409 if meal already added to the specific day menu on /api/v1/menu POST', (done) => {
     chai.request(server)
       .post('/api/v1/menu/')
-      .send({ mealName: 'semo', dayOfWeek: 7, price: 200 })
+      .send({ mealmealName: 'semo', dayOfWeek: 7, mealPrice: 200 })
       .end((err, res) => {
         res.should.have.status(409);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('statusCode');
-        res.body.message.should.equal('Meal already added for this day menu');
 
 
         done();
@@ -343,8 +321,8 @@ describe('Menu API Tests', () => {
 
 describe('Orders API Tests', () => {
   it('should list ALL on /api/v1/orders GET', (done) => {
-    before(() => console.log("Testing started"));
-    after(() => console.log("Testing finished!"));
+    before(() => console.log('Testing started'));
+    after(() => console.log('Testing finished!'));
     chai.request(server)
       .get('/api/v1/orders')
       .end((err, res) => {
@@ -354,8 +332,8 @@ describe('Orders API Tests', () => {
         res.body.should.have.property('orders');
         res.body.error.should.be.false;
         res.body.orders[0].should.have.property('id');
-        res.body.orders[0].should.have.property('name');
-        res.body.orders[0].should.have.property('price');
+        res.body.orders[0].should.have.property('mealName');
+        res.body.orders[0].should.have.property('mealPrice');
         res.body.orders[0].should.have.property('buyerName');
         res.body.orders[0].should.have.property('deliveryAddress');
         res.body.orders[0].should.have.property('buyerPhone');
@@ -381,8 +359,6 @@ describe('Orders API Tests', () => {
             response.should.have.status(200);
             response.should.be.json;
             response.body.should.be.a('object');
-            response.body.should.have.property('statusCode');
-            response.body.message.should.be.equal('success');
 
             done();
           });
@@ -400,8 +376,6 @@ describe('Orders API Tests', () => {
             response.should.have.status(404);
             response.should.be.json;
             response.body.should.be.a('object');
-            response.body.should.have.property('statusCode');
-            response.body.message.should.be.equal('Order not found');
 
             done();
           });
@@ -412,10 +386,10 @@ describe('Orders API Tests', () => {
     chai.request(server)
       .post('/api/v1/orders/')
       .send({
-        name: 'Saucy',
-        price: 78,
+        mealName: 'Saucy',
+        mealPrice: 78,
         mealId: '11234',
-        buyerName: 'Yomi Ola',
+        buyermealName: 'Yomi Ola',
         deliveryAddress: 'Ota',
         buyerPhone: '089000',
         quantity: 6,
@@ -425,8 +399,6 @@ describe('Orders API Tests', () => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('message');
-        res.body.message.should.equal('success');
 
         done();
       });
@@ -435,11 +407,11 @@ describe('Orders API Tests', () => {
   it('should return status code 400 when an order id is not passed to on /api/v1/orders POST', (done) => {
     chai.request(server)
       .post('/api/v1/orders/')
-      .send({ 
-        name: 'Saucy',
-        price: 78,
+      .send({
+        mealName: 'Saucy',
+        mealPrice: 78,
         mealId: '',
-        buyerName: 'Yomi Ola',
+        buyermealName: 'Yomi Ola',
         deliveryAddress: 'Ota',
         buyerPhone: '089000',
         quantity: 6,
@@ -450,9 +422,99 @@ describe('Orders API Tests', () => {
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('message');
-        res.body.message.should.equal('Please select a meal option to start an order');
-        res.body.statusCode.should.equal(400);
 
+
+        done();
+      });
+  });
+});
+
+
+// Test Customer API/functions
+describe('Customer API Test', () => {
+  it('should create a customer on /api/v1/customer POST', (done) => {
+    before(() => console.log('Testing started'));
+    after(() => console.log('Testing finished!'));
+    chai.request(server)
+      .post('/api/v1/customer')
+      .send({
+        customerName: 'Yomi',
+        customerEmail: 'yoyo@gmail.com',
+        customerPassword: '123456',
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.customerSingular.should.have.property('id');
+        res.body.customerSingular.should.have.property('customerName');
+        res.body.customerSingular.should.have.property('customerEmail');
+        res.body.customerSingular.should.have.property('customerId');
+
+        done();
+      });
+  });
+
+  it('should login a customer on /api/v1/customer/login POST', (done) => {
+    before(() => console.log('Testing started'));
+    after(() => console.log('Testing finished!'));
+    chai.request(server)
+      .post('/api/v1/customer/login')
+      .send({
+        customerEmail: 'g@gmail.com',
+        customerPassword: '123456',
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+
+        done();
+      });
+  });
+});
+
+// Test User(Vendor) API
+
+describe('Vendor API Tests', () => {
+  it('should create a vendor on /api/v1/vendor POST', (done) => {
+    before(() => console.log('Testing started'));
+    after(() => console.log('Testing finished!'));
+    chai.request(server)
+      .post('/api/v1/vendor')
+      .send({
+        vendorName: 'Yomi',
+        vendorEmail: 'yoyo@gmail.com',
+        vendorBusinessName: 'Yummy',
+        vendorPassword: '123456',
+
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.vendorSingular.should.have.property('id');
+        res.body.vendorSingular.should.have.property('vendorName');
+        res.body.vendorSingular.should.have.property('vendorEmail');
+        res.body.vendorSingular.should.have.property('vendorId');
+
+        done();
+      });
+  });
+
+  it('should login a vendor on /api/v1/vendor/login POST', (done) => {
+    before(() => console.log('Testing started'));
+    after(() => console.log('Testing finished!'));
+    chai.request(server)
+      .post('/api/v1/vendor/login')
+      .send({
+        vendorEmail: 'g@gmail.com',
+        vendorPassword: '123456',
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
 
         done();
       });
