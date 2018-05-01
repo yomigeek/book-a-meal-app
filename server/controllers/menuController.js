@@ -19,7 +19,6 @@ const menu = ([
 
 
 export function allMenu(req, res) {
-  // res.status(200).send('Ok')
   return res.json({
     menu,
     error: false,

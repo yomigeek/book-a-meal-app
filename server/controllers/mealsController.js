@@ -2,8 +2,8 @@ const meals = ([
 
   {
     id: 1,
-    mealmealName: 'semo',
-    mealmealPrice: '200',
+    mealName: 'semo',
+    mealPrice: '200',
     mealImage: './meals_photo/111234.jpg',
     mealId: '7cd',
   },

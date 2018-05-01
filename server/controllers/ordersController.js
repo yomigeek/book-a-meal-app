@@ -32,7 +32,6 @@ const orders = ([
 ]);
 
 export function allOrders(req, res) {
-  // res.status(200).send('Ok')
   return res.json({
     orders,
     error: false,
