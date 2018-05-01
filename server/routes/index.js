@@ -14,7 +14,7 @@ router.delete('/api/v1/meals/:mealId', mealsController.deleteMeal);
 
 // Menu API Routes
 router.get('/api/v1/menu', menuController.allMenu);
-router.get('/api/v1/menu/:id', menuController.menuByDay);
+router.get('/api/v1/menu/:id', menuController.menuForTheDay);
 router.post('/api/v1/menu', menuController.addToMenu);
 
 // Orders API Routes
