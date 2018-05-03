@@ -432,11 +432,11 @@ describe('Orders API Tests', () => {
 
 // Test Customer API/functions
 describe('Customer API Test', () => {
-  it('should create a customer on /api/v1/customer POST', (done) => {
+  it('should create a customer on /auth/customer/signup POST', (done) => {
     before(() => console.log('Testing started'));
     after(() => console.log('Testing finished!'));
     chai.request(server)
-      .post('/api/v1/customer')
+      .post('/auth/customer/signup')
       .send({
         customerName: 'Yomi',
         customerEmail: 'yoyo@gmail.com',
@@ -455,11 +455,11 @@ describe('Customer API Test', () => {
       });
   });
 
-  it('should login a customer on /api/v1/customer/login POST', (done) => {
+  it('should login a customer on /auth/customer/login POST', (done) => {
     before(() => console.log('Testing started'));
     after(() => console.log('Testing finished!'));
     chai.request(server)
-      .post('/api/v1/customer/login')
+      .post('/auth/customer/login')
       .send({
         customerEmail: 'g@gmail.com',
         customerPassword: '123456',
@@ -477,11 +477,11 @@ describe('Customer API Test', () => {
 // Test User(Vendor) API
 
 describe('Vendor API Tests', () => {
-  it('should create a vendor on /api/v1/vendor POST', (done) => {
+  it('should create a vendor on /auth/vendor/signup POST', (done) => {
     before(() => console.log('Testing started'));
     after(() => console.log('Testing finished!'));
     chai.request(server)
-      .post('/api/v1/vendor')
+      .post('/auth/vendor/signup')
       .send({
         vendorName: 'Yomi',
         vendorEmail: 'yoyo@gmail.com',
@@ -502,11 +502,11 @@ describe('Vendor API Tests', () => {
       });
   });
 
-  it('should login a vendor on /api/v1/vendor/login POST', (done) => {
+  it('should login a vendor on /auth/vendor/login POST', (done) => {
     before(() => console.log('Testing started'));
     after(() => console.log('Testing finished!'));
     chai.request(server)
-      .post('/api/v1/vendor/login')
+      .post('/auth/vendor/login')
       .send({
         vendorEmail: 'g@gmail.com',
         vendorPassword: '123456',

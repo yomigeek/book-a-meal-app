@@ -1,3 +1,8 @@
+import jwt from 'jsonwebtoken';
+import { LocalStorage } from 'node-localstorage';
+import config from '../config';
+
+
 const customers = ([
 
   {
@@ -53,7 +58,7 @@ export function createCustomer(req, res) {
 export function loginCustomer(req, res) {
   if (!req.body.customerEmail) {
     return res.status(400).send({
-      message: 'Please enter a name',
+      message: 'Please enter an email',
     });
   }
   if (!req.body.customerPassword) {
@@ -63,9 +68,26 @@ export function loginCustomer(req, res) {
   }
   const myCustomerLogin = customers
     .find((customerFinder => customerFinder.customerEmail === req.body.customerEmail) && (customerFinder => customerFinder.customerPassword === req.body.customerPassword));
+
   if (myCustomerLogin) {
+    const token = jwt.sign(
+      {
+        custEmail: req.body.customerEmail,
+      },
+      config.secret, {
+        expiresIn: (24 * 60 * 60),
+      },
+    );
+    if (typeof localStorage === 'undefined' || localStorage === null) {
+      localStorage = new LocalStorage('./scratch');
+    }
+
+    localStorage.setItem('myFirstKey', 'myFirstValue');
     return res.status(200).send({
       message: 'success',
+      token,
+      val: localStorage.getItem('myFirstKey'),
+
     });
   }
   return res.status(404).send({
