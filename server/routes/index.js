@@ -1,26 +1,24 @@
 import { Router } from 'express';
+import { LocalStorage } from 'node-localstorage';
 import { allMeals, getMealById, addAMeal, updateAMeal, deleteMeal } from '../controllers/mealsController';
 import { allMenu, menuForTheDay, addToMenu } from '../controllers/menuController';
 import { allOrders, updateOrder, addOrder } from '../controllers/ordersController';
 import { createVendor, loginVendor } from '../controllers/vendorController';
 import { createCustomer, loginCustomer } from '../controllers/customerController';
 
-const router = Router();
+let localStorage;
 
-let tokenValue = '';
-if (typeof (localStorage) === 'undefined') {
-  tokenValue = 'sss';
-} else {
-  tokenValue = localStorage.token;
-}
+const router = Router();
 
 router.use((req, res, next) => {
   // inject default headers
-  res.header('x-access-token', tokenValue);
+  res.header('x-access-token', localStorage.getItem('tokenValue'));
 
   next();
 });
-
+if (typeof (localStorage) === 'undefined' || localStorage === null) {
+  localStorage = new LocalStorage('../scratch/tokenValue');
+}
 // Meals API Routes
 router.get('/api/v1/meals', allMeals);
 router.get('/api/v1/meals/:mealId', getMealById);

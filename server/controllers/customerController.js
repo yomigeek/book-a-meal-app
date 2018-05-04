@@ -1,37 +1,43 @@
 import jwt from 'jsonwebtoken';
 import { LocalStorage } from 'node-localstorage';
 import config from '../config';
+import models from '../models';
+
+let localStorage;
+let customers;
+
+// Model to list out the list of customers
+models.userCustomers.findAll().then((listOfCustomers) => {
+  customers = listOfCustomers;
+  return listOfCustomers;
+});
 
 
-const customers = ([
-
-  {
-    id: 1,
-    customerName: 'ope',
-    customerEmail: 'g@gmail.com',
-    customerId: '3acd',
-    customerPassword: '123456',
-  },
-
-
-]);
-
+// Function to sign up new individual customers
 export function createCustomer(req, res) {
+
+  // check if name field was supplied
   if (!req.body.customerName) {
     return res.status(400).send({
       message: 'Please enter a name',
     });
   }
+
+  // checks id the email field was supplied
   if (!req.body.customerEmail) {
     return res.status(400).send({
       message: 'Please enter an email',
     });
   }
+
+  // checks if the password field was supplied
   if (!req.body.customerPassword) {
     return res.status(400).send({
       message: 'Please enter a password',
     });
   }
+
+  // checks if the customer information already exist
   const mycustomer = customers
     .find((customerFinder => customerFinder.customerName === req.body.customerName) && (customerFinder => customerFinder.customerEmail === req.body.customerEmail));
   if (mycustomer) {
@@ -39,15 +45,18 @@ export function createCustomer(req, res) {
       message: 'Customer Already Exist!',
     });
   }
-  const customerSingular = ({
+
+  const customerSingular = models.userCustomers.build({
     id: customers.length + 1,
     customerName: req.body.customerName,
     customerEmail: req.body.customerEmail,
     customerPassword: req.body.customerPassword,
     customerId: Math.floor(Math.random() * 200000),
   });
-  customers.push(customerSingular);
-  return res.send({
+
+  // saves the details of the new customer to the database after succssful validations
+  customerSingular.save().then(newCustomer => newCustomer);
+  return res.status(200).send({
     message: 'success',
     customerSingular,
   });
@@ -78,15 +87,13 @@ export function loginCustomer(req, res) {
         expiresIn: (24 * 60 * 60),
       },
     );
-    if (typeof localStorage === 'undefined' || localStorage === null) {
+    if (typeof (localStorage) === 'undefined' || localStorage === null) {
       localStorage = new LocalStorage('./scratch');
     }
-
-    localStorage.setItem('myFirstKey', 'myFirstValue');
+    localStorage.setItem('tokenValue', token);
     return res.status(200).send({
       message: 'success',
-      token,
-      val: localStorage.getItem('myFirstKey'),
+      tokenValue: localStorage.getItem('tokenValue'),
 
     });
   }

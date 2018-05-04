@@ -1,32 +1,20 @@
-const meals = ([
+import models from '../models';
 
-  {
-    id: 1,
-    mealName: 'semo',
-    mealPrice: '200',
-    mealImage: './meals_photo/111234.jpg',
-    mealId: '7cd',
-  },
-  {
-    id: 2,
-    mealName: 'fried rice',
-    mealPrice: '400',
-    mealImage: './meals_photo/3456.jpg',
-    mealId: '78v',
-  },
-
-]);
+let meals;
+models.allMeals.findAll().then((listOfMeals) => {
+  meals = listOfMeals;
+  return meals;
+});
 
 export function allMeals(req, res) {
-  // res.status(200).send('Ok')
-  return res.json({
+  return res.status(200).send({
     meals,
     error: false,
   });
 }
 
 export function getMealById(req, res) {
-  const meal = meals.find(mealFinder => mealFinder.mealId === req.params.mealId);
+  const meal = meals.find(mealFinder => mealFinder.mealId == req.params.mealId);
   if (!meal) {
     res.status(404).send('Meal not found!');
     return;
@@ -50,23 +38,26 @@ export function addAMeal(req, res) {
       message: 'Please upload a photo for the meal!',
     });
   }
-  const myMeal = meals.find(m => m.mealName === req.body.mealName);
+  const myMeal = meals.find(m => m.mealName == req.body.mealName);
   if (myMeal) {
     return res.status(409).send('Meal Already Exist!');
   }
-  const meal = ({
+  const addNewMeal = models.allMeals.build({
     id: meals.length + 1,
     mealName: req.body.mealName,
     mealPrice: req.body.mealPrice,
     mealImage: req.body.mealImage,
     mealId: Math.floor(Math.random() * 200000),
   });
-  meals.push(meal);
-  return res.send(meal);
+
+  addNewMeal.save().then(newMealTask => newMealTask);
+  return res.status(200).send({
+    message: 'success',
+  });
 }
 
 export function updateAMeal(req, res) {
-  const meal = meals.find(mealFinder => mealFinder.mealId === req.params.mealId);
+  const meal = meals.find(mealFinder => mealFinder.mealId == req.params.mealId);
   if (!meal) {
     return res.status(404).send({
       message: 'Meal cannot be found!',
@@ -97,7 +88,7 @@ export function updateAMeal(req, res) {
 }
 
 export function deleteMeal(req, res) {
-  const meal = meals.find(mealFinder => mealFinder.mealId === req.params.mealId);
+  const meal = meals.find(mealFinder => mealFinder.mealId == req.params.mealId);
   if (!meal) {
     return res.status(404).send({
       message: 'Meal does not exist',
