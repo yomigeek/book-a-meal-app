@@ -6,6 +6,7 @@ import { allOrders, updateOrder, addOrder } from '../controllers/ordersControlle
 import { createVendor, loginVendor } from '../controllers/vendorController';
 import { createCustomer, loginCustomer } from '../controllers/customerController';
 
+// Declare a localStorage for storing JWT tokens
 let localStorage;
 
 const router = Router();
@@ -39,7 +40,6 @@ router.post('/api/v1/orders', addOrder);
 // User(Vendor) API
 router.post('/auth/vendor/signup', createVendor);
 router.post('/auth/vendor/login', loginVendor);
-
 
 // User(Customer) API
 router.post('/auth/customer/signup', createCustomer);

@@ -39,7 +39,7 @@ export function createCustomer(req, res) {
 
   // checks if the customer information already exist
   const mycustomer = customers
-    .find((customerFinder => customerFinder.customerName === req.body.customerName) && (customerFinder => customerFinder.customerEmail === req.body.customerEmail));
+    .filter(customerFinder => customerFinder.customerName == req.body.customerName && customerFinder.customerEmail == req.body.customerEmail);
   if (mycustomer) {
     return res.status(409).send({
       message: 'Customer Already Exist!',
@@ -65,23 +65,27 @@ export function createCustomer(req, res) {
 
 // Customer Login function
 export function loginCustomer(req, res) {
+// Check if email was supplied by the user
   if (!req.body.customerEmail) {
     return res.status(400).send({
       message: 'Please enter an email',
     });
   }
+
+// Check if password was supplied by the user
   if (!req.body.customerPassword) {
     return res.status(400).send({
       message: 'Please enter a password',
     });
   }
-  const myCustomerLogin = customers
-    .find((customerFinder => customerFinder.customerEmail === req.body.customerEmail) && (customerFinder => customerFinder.customerPassword === req.body.customerPassword));
+
+  // Check if customer exist already
+  const myCustomerLogin = customers.find(customerFinder => customerFinder.customerEmail === req.body.customerEmail && customerFinder.customerPassword === req.body.customerPassword);
 
   if (myCustomerLogin) {
     const token = jwt.sign(
       {
-        custEmail: req.body.customerEmail,
+        myCustomerEmail: req.body.customerEmail,
       },
       config.secret, {
         expiresIn: (24 * 60 * 60),

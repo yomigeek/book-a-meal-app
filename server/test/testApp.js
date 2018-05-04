@@ -8,7 +8,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-// Test meals API/functions
+// Test meals API/functions in the meal controller
 describe('Meals API Tests', () => {
   it('should list ALL on /api/v1/meals GET', (done) => {
     before(() => console.log('Testing started'));
@@ -215,7 +215,7 @@ describe('Meals API Tests', () => {
 });
 
 
-// Test Menu API Functions
+// Test Menu API Functions from the menu controller
 
 describe('Menu API Tests', () => {
   it('should list ALL on /api/v1/menu GET', (done) => {
@@ -317,7 +317,7 @@ describe('Menu API Tests', () => {
   });
 });
 
-// Tests for Orders API Functions
+// Tests for Orders API Functions from the order controller
 
 describe('Orders API Tests', () => {
   it('should list ALL on /api/v1/orders GET', (done) => {
@@ -430,7 +430,7 @@ describe('Orders API Tests', () => {
 });
 
 
-// Test Customer API/functions
+// Test Customer API/functions from the customerController
 describe('Customer API Test', () => {
   it('should create a customer on /auth/customer/signup POST', (done) => {
     before(() => console.log('Testing started'));
@@ -474,7 +474,7 @@ describe('Customer API Test', () => {
   });
 });
 
-// Test User(Vendor) API
+// Test User(Vendor) API from the vendorController
 
 describe('Vendor API Tests', () => {
   it('should create a vendor on /auth/vendor/signup POST', (done) => {

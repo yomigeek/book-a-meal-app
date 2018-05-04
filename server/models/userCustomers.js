@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-  let userCustomers = sequelize.define('userCustomers', {
+export default function (sequelize, DataTypes) {
+  const userCustomers = sequelize.define('userCustomers', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -14,4 +14,4 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
   return userCustomers;
-};
+}

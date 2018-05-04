@@ -4,7 +4,6 @@
   "description": "book a meal app",
   "main": "app.js",
   "scripts": {
-
     "test": "set NODE_ENV=test&&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/testApp.js --exit",
     "build": "rimraf dist/ && babel ./ -- out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/app.js",
@@ -30,7 +29,7 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-   "istanbul": "^0.4.5",
+    "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
     "request": "^2.85.0",
     "rimraf": "^2.6.2",
@@ -44,7 +43,6 @@
       "error",
       "windows"
     ]
-    
   },
   "eslintConfig": {
     "env": {

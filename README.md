@@ -1,12 +1,18 @@
 # Book-a-meal-app
 
-[![Build Status](https://travis-ci.org/yomigeek/book-a-meal-app.svg?branch=review)](https://travis-ci.org/yomigeek/book-a-meal-app) [![Coverage Status](https://coveralls.io/repos/github/yomigeek/book-a-meal-app/badge.svg?branch=review)](https://coveralls.io/github/yomigeek/book-a-meal-app?branch=review) [![Test Coverage](https://api.codeclimate.com/v1/badges/830debbd00f194ec0e5c/test_coverage)](https://codeclimate.com/github/yomigeek/book-a-meal-app/test_coverage)
+[![Build Status](https://travis-ci.org/yomigeek/book-a-meal-app.svg?branch=staging)](https://travis-ci.org/yomigeek/book-a-meal-app) [![Coverage Status](https://coveralls.io/repos/github/yomigeek/book-a-meal-app/badge.svg?branch=staging)](https://coveralls.io/github/yomigeek/book-a-meal-app?branch=staging) [![Test Coverage](https://api.codeclimate.com/v1/badges/830debbd00f194ec0e5c/test_coverage)](https://codeclimate.com/github/yomigeek/book-a-meal-app/test_coverage)
 
 ## About Book-A-Meal Application
 An application that allows customers to make food orders and helps the food vendor provide and know what the customers want to eat.
 
-## Demo
+## User Interface Demo
 Here is a working live demo : https://yomigeek.github.io/book-a-meal-app/UI/index.html
+
+## Heroku Demo
+Here is a working live demo of my API endpoints on heroku : 
+* For list of meals: https://mybookamealapp.herokuapp.com/api/v1/meals
+* For list of menu: https://mybookamealapp.herokuapp.com/api/v1/menu
+* For list of orders: https://mybookamealapp.herokuapp.com/api/v1/orders
 
 ## Built with 
 HTML
@@ -18,11 +24,11 @@ NodeJS (Express Framework)
 
 ## Customers
 
-    * Customer(Individual) dashboard contains:
-    * List of meal for specific days
-    * Link to orders
-    * Link to orders in cart - yet to complete
-    * Log out link 
+* Customer(Individual) dashboard contains:
+* List of meal for specific days
+* Link to orders
+* Link to orders in cart - yet to complete
+* Log out link 
  
 
 ## Vendors (Caterers)

@@ -4,7 +4,7 @@ import config from './config';
 
 const router = express.Router();
 
-
+// This function verifies the token via the response header or body token
 export function verifyToken(req, res, next) {
   const token = req.body.token || req.headers['x-access-token'];
   if (token) {

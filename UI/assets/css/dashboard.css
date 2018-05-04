@@ -21,7 +21,7 @@ body {
     font-size: 16px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 120px 0 rgba(0, 0, 0, 0.19);
     background-image: url("../images/food2.jpg");
-    height:  195px;
+    height: 260px;
     font-weight: bold;
 
     
@@ -64,7 +64,8 @@ body {
     justify-content: center;
     margin-right: 200px;
     margin-left: 200px;
-    align-items: center;     
+    align-items: center;   
+  
 
   }
 
@@ -509,7 +510,8 @@ iPad 3
   /* Style the footer */
   .footer {
     grid-area: footer;
-    background-color: #f1f1f1;
+    background-color: #000;
+    color: #fff;
     padding: 10px;
     text-align: center;
   }
@@ -642,7 +644,7 @@ iPad 3
 }
 .orderDateForm { 
   margin: 0 auto;
-  width: 70%;
+  width: 50%;
   background: #f4f4f4;
   border-radius: 8px;
   font-size: 12px;
@@ -695,3 +697,16 @@ iPad 3
   align-content:center;
   border-radius:100%;
 }
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}

@@ -4,31 +4,6 @@ import { json } from 'body-parser';
 import jwt from 'jsonwebtoken';
 import config from './config';
 
-const models = require('./models');
-
-/* const myTask = models.userCustomers.build({
-  id: 2,
-  customerName: 'yomi',
-  customerEmail: 'seayomi@gmail.com',
-  customerId: '100',
-  customerPassword: '123456',
-});
-
-myTask.save().then((newTask) => {
-  console.log(newTask);
-}); */
-
-/* let m = {};
-const a = models.allMeals.findAll().then((listOfMeals) => {
-  // console.log(listOfMeals);
-  m = listOfMeals;
- console.log(m);
-});
-console.log(m); */
-
-
-// console.log(meals);
-
 const router = express.Router();
 
 const app = express();
