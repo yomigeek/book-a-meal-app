@@ -48,7 +48,7 @@ a{
 }
 .titleHeaders{
 
-       font: 17px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       font: 20px/10px "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-weight: bold;
         text-align: center;
         color: #ce0b10
@@ -134,10 +134,9 @@ a{
     font-weight: bold;
     color: #fff;
     text-align: center;
-    text-shadow: 0 1px rgba(white, 0.5);
-    background: #81a821;
-    border: 1px solid;
-    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
+    text-shadow: 0 1px ;
+    background: #ce0b10;
+    border: none;
     border-radius: 25px;
     cursor: pointer;
   }
@@ -153,9 +152,8 @@ a{
     color: #fff;
     text-align: center;
     text-shadow: 0 1px rgba(white, 0.5);
-    background: #81a821;
+    background: #64dd17;
     border: 1px solid;
-    border-color: #d8d8d8 #d1d1d1 #c3c3c3;
     border-radius: 25px;
     cursor: pointer;
   }
@@ -166,7 +164,21 @@ a{
     margin-top: 10px;
     font-size: 14px;
     font-weight: bold;
-    color: #81a821;
+    color: #64dd17;
     text-align: center;
    
   }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even){background-color: #f2f2f2}

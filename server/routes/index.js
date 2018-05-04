@@ -1,28 +1,38 @@
 const express = require('express');
+
 const router = express.Router();
 
-const meals_controller = require('../controllers/mealsController');
-const menu_controller = require ('../controllers/menuController');
-const orders_controller = require('../controllers/ordersController');
+const mealsController = require('../controllers/mealsController');
+const menuController = require('../controllers/menuController');
+const ordersController = require('../controllers/ordersController');
+const vendorController = require('../controllers/vendorController');
+const customerController = require('../controllers/customerController');
+
 // Meals API Routes
-router.get('/api/v1/meals', meals_controller.allMeals);
-router.get('/api/v1/meals/:mealId', meals_controller.getMealById);
-router.post('/api/v1/meals/', meals_controller.addAMeal);
-router.put('/api/v1/meals/:mealId', meals_controller.updateAMeal);
-router.delete('/api/v1/meals/:mealId', meals_controller.deleteMeal);
+router.get('/api/v1/meals', mealsController.allMeals);
+router.get('/api/v1/meals/:mealId', mealsController.getMealById);
+router.post('/api/v1/meals/', mealsController.addAMeal);
+router.put('/api/v1/meals/:mealId', mealsController.updateAMeal);
+router.delete('/api/v1/meals/:mealId', mealsController.deleteMeal);
 
 // Menu API Routes
-router.get('/api/v1/menu', menu_controller.allMenu);
-router.get('/api/v1/menu/:id', menu_controller.menuByDay);
-router.post('/api/v1/menu', menu_controller.addToMenu);
+router.get('/api/v1/menu', menuController.allMenu);
+router.get('/api/v1/menu/:id', menuController.menuForTheDay);
+router.post('/api/v1/menu', menuController.addToMenu);
 
-//Orders API Routes
-router.get('/api/v1/orders', orders_controller.allOrders);
-router.put('/api/v1/orders/:orderId', orders_controller.updateOrder);
-router.post('/api/v1/orders', orders_controller.addOrder);
+// Orders API Routes
+router.get('/api/v1/orders', ordersController.allOrders);
+router.put('/api/v1/orders/:orderId', ordersController.updateOrder);
+router.post('/api/v1/orders', ordersController.addOrder);
 
-//router.use('/api/v1/meals', require('./meals'));
-/*router.use('/api/v1/menu', require('./menu'));
-router.use('/api/v1/orders', require('./orders'));*/
+// User(Vendor) API
+router.post('/api/v1/vendor', vendorController.createVendor);
+router.post('/api/v1/vendor/login', vendorController.loginVendor);
+
+
+// User(Customer) API
+router.post('/api/v1/customer', customerController.createCustomer);
+router.post('/api/v1/customer/login', customerController.loginCustomer);
+
 
 module.exports = router;

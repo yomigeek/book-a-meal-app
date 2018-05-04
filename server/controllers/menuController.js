@@ -1,99 +1,66 @@
 const menu = ([
 
-    {
-        id: 1,
-        dayOfWeek: 2,
-        mealName: "semo",
-        price: 400,
-        mealId: "3acd"
-        
-    },
-     {
-        id: 2,
-        dayOfWeek: 4,
-        mealName: "fried chicken",
-        price: 700,
-        mealId: "5racd"
-    }
+  {
+    id: 1,
+    dayOfWeek: 2,
+    mealName: 'semo',
+    mealPrice: 400,
+    mealId: '3acd',
+  },
+  {
+    id: 2,
+    dayOfWeek: 4,
+    mealName: 'fried chicken',
+    mealPrice: 700,
+    mealId: '5racd',
+  },
 
 ]);
 
 
-exports.allMenu = function(req, res) {
-    //res.status(200).send('Ok')
-    return res.json({
-        menu,
-        error: false 
-    });
-
+export function allMenu(req, res) {
+  return res.json({
+    menu,
+    error: false,
+  });
 }
 
-exports.menuByDay = function(req, res) {
-
-    const dayMenu = menu.find(m => m.dayOfWeek === parseInt(req.params.id));
-
-    if (!dayMenu) {
-        
-        res.status(404).send({
-
-            statusCode: '404',
-            message:'No Meal exist on this day menu.',
-        });
-
-        return;
+export function menuForTheDay(req, res) {
+  const dayMenu = menu.find(mealFinder => mealFinder.dayOfWeek === parseInt(req.params.id, 10));
+  if (!dayMenu) {
+    return res.status(404).send({
+      message: 'No Meal exist on this day menu.',
+    });
+  }
+  return res.send({
+    message: 'success',
+    dayMenu,
+  });
 }
 
-    return res.send({
-
-            statusCode: '200',
-            message:'success',
-            dayMenu
-        });
-}
-
-exports.addToMenu = function(req, res) {
-
-    if (!req.body.dayOfWeek) {
-
-        res.status(400).send({
-            
-            statusCode: 400,        
-            message:'Please select a day of the week..',
-        
+export function addToMenu(req, res) {
+  if (!req.body.dayOfWeek) {
+    return res.status(400).send({
+      message: 'Please select a day of the week..',
     });
-    return;
-
-    }
-
-    const myMenu = menu.find((m => m.mealName == req.body.mealName) && (m => m.dayOfWeek == req.body.dayOfWeek) );
-
-    if (myMenu) {
-        res.status(409).send({
-            
-            statusCode: 409,        
-            message:'Meal already added for this day menu',
-        
+  }
+  const myMenu = menu
+    .find((mealFinder => mealFinder.mealName === req.body.mealName) && (mealFinder => mealFinder.dayOfWeek === req.body.dayOfWeek));
+  if (myMenu) {
+    return res.status(409).send({
+      message: 'Meal already added for this day menu',
     });
-    return;
-
-    }
-
-    const menuSingular = ({
-        id: menu.length + 1,
-        mealName: req.body.mealName,
-        dayOfWeek: req.body.dayOfWeek,
-        price: req.body.price,
-        mealId: Math.floor(Math.random() * 200000)
-    });
-
-    menu.push(menuSingular);
-
-    return res.send({
-
-        statusCode: 200,
-        message: 'success',
-        menuSingular,
-
-    });
-
+  }
+  const menuSingular = ({
+    id: menu.length + 1,
+    mealName: req.body.mealName,
+    dayOfWeek: req.body.dayOfWeek,
+    mealPrice: req.body.mealPrice,
+    mealId: Math.floor(Math.random() * 200000),
+  });
+  menu.push(menuSingular);
+  return res.send({
+    message: 'success',
+    menuSingular,
+  });
 }
