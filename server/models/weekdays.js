@@ -1,7 +1,5 @@
-
-
-module.exports = (sequelize, DataTypes) => {
-  let weekdays = sequelize.define('weekdays', {
+export default function (sequelize, DataTypes) {
+  const weekdays = sequelize.define('weekdays', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -9,10 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     dayName: DataTypes.STRING,
     dayValue: DataTypes.INTEGER,
-    
   }, {});
   weekdays.associate = function (models) {
     // associations can be defined here
   };
   return weekdays;
-};
+}

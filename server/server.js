@@ -4,8 +4,6 @@ import { json } from 'body-parser';
 import jwt from 'jsonwebtoken';
 import config from './config';
 
-const router = express.Router();
-
 const app = express();
 const port = process.env.PORT || 5000;
 

@@ -39,7 +39,7 @@ export function createCustomer(req, res) {
 
   // checks if the customer information already exist
   const mycustomer = customers
-    .filter(customerFinder => customerFinder.customerName == req.body.customerName && customerFinder.customerEmail == req.body.customerEmail);
+    .filter(customerFinder => customerFinder.customerName == req.body.customerName && customerFinder.customerEmail === req.body.customerEmail);
   if (mycustomer) {
     return res.status(409).send({
       message: 'Customer Already Exist!',
@@ -80,7 +80,7 @@ export function loginCustomer(req, res) {
   }
 
   // Check if customer exist already
-  const myCustomerLogin = customers.find(customerFinder => customerFinder.customerEmail === req.body.customerEmail && customerFinder.customerPassword === req.body.customerPassword);
+  const myCustomerLogin = customers.find(customerFinder => customerFinder.customerEmail == req.body.customerEmail && customerFinder.customerPassword == req.body.customerPassword);
 
   if (myCustomerLogin) {
     const token = jwt.sign(
