@@ -10,9 +10,11 @@ export default function (sequelize, DataTypes) {
     mealPrice: DataTypes.INTEGER,
     mealImage: DataTypes.STRING,
     mealId: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
   }, {});
-  allMeals.associate = function (models) {
-    // associations can be defined here
+
+  allMeals.associate = (models) => {
+    allMeals.belongsTo(models.userCustomers, { foreignKey: 'userId', targetKey: 'id' });
   };
   return allMeals;
 }

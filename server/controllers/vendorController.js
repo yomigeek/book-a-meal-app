@@ -1,80 +1,90 @@
-const vendors = ([
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import config from '../config';
+import models from '../models';
 
-  {
-    id: 1,
-    vendorName: 'semo',
-    vendorBusinessName: 'Iya put',
-    vendorEmail: 'g@gmail.com',
-    vendorId: '3acd',
-    vendorPassword: '123456',
-  },
+let customersList;
 
-]);
+class VendorController {
+  static createVendor(req, res) {
+  // checks if the customer information already exist
+    models.userCustomers.findOne({
+      where: {
+        customerEmail: req.body.customerEmail,
+        customerRole: 'admin',
+        customerName: req.body.customerName,
+      },
+    })
+      .then((data) => {
+        if (data) {
+          return res.status(409).send({
+            message: 'User already exist! Try using another name or email.',
+          });
+        } else if (!data) {
+          // Password hashing using bcryptjs
+          const hashedPassword = bcrypt.hashSync(req.body.customerPassword, 10);
+          // All users
+          models.userCustomers.findAll().then((listOfCustomers) => {
+            customersList = listOfCustomers;
+          });
+          // create customer information
+          models.userCustomers.build({
+            id: customersList.length + 1,
+            customerName: req.body.customerName,
+            customerEmail: req.body.customerEmail,
+            customerPassword: hashedPassword,
+            customerRole: 'admin',
+            customerId: Math.floor(Math.random() * 2000000000),
+          }).save();
+          return res.status(201).send({
+            message: 'Account has been created successfully!',
+          });
+        }
+        return res.send({
+          message: 'Taking too long to complete...',
+        });
+      })
+      .catch(err => res.status(404).send({
+        message: 'Proccess aborted',
+      }));
+  }
 
-export function createVendor(req, res) {
-  if (!req.body.vendorName) {
-    return res.status(400).send({
-      message: 'Please enter a name',
-    });
+
+  // Vendor Login function
+  static loginVendor(req, res) {
+    // Entered user password hash
+    models.userCustomers.findOne({
+      where: {
+        customerEmail: req.body.customerEmail,
+      },
+    })
+      .then((data) => {
+        const comparedpassword = bcrypt.compareSync(req.body.customerPassword, data.dataValues.customerPassword);
+
+        if (comparedpassword === true) {
+          const token = jwt.sign(
+            {
+              myCustomerId: data.dataValues.id,
+              myCustomerRole: data.dataValues.customerRole,
+            },
+            config.secret, {
+              expiresIn: '1hr',
+            },
+          );
+          return res.status(200).send({
+            message: 'Login successful',
+            token,
+
+          });
+        }
+        return res.status(403).send({
+          message: 'Wrong password!',
+        });
+      })
+      .catch(err => res.status(404).send({
+        message: 'Customer does not exist',
+      }));
   }
-  if (!req.body.vendorBusinessName) {
-    return res.status(400).send({
-      message: 'Please enter a business name',
-    });
-  }
-  if (!req.body.vendorEmail) {
-    return res.status(400).send({
-      message: 'Please enter an email',
-    });
-  }
-  if (!req.body.vendorPassword) {
-    return res.status(400).send({
-      message: 'Please enter a password',
-    });
-  }
-  const myVendor = vendors
-    .find((vendorFinder => vendorFinder.vendorName === req.body.vendorName) && (vendorFinder => vendorFinder.vendorBusinessName === req.body.vendorBusinessName));
-  if (myVendor) {
-    return res.status(409).send({
-      message: 'Vendor Already Exist!',
-    });
-  }
-  const vendorSingular = ({
-    id: vendors.length + 1,
-    vendorName: req.body.vendorName,
-    vendorEmail: req.body.vendorEmail,
-    vendorBusinessName: req.body.vendorBusinessName,
-    vendorPassword: req.body.vendorPassword,
-    vendorId: Math.floor(Math.random() * 200000),
-  });
-  vendors.push(vendorSingular);
-  return res.send({
-    message: 'success',
-    vendorSingular,
-  });
 }
 
-
-// Vendor Login function
-export function loginVendor(req, res) {
-  if (!req.body.vendorEmail) {
-    return res.status(400).send({
-      message: 'Please enter a name',
-    });
-  }
-  if (!req.body.vendorPassword) {
-    return res.status(400).send({
-      message: 'Please enter a password',
-    });
-  }
-  const myVendorLogin = vendors
-    .find((vendorFinder => vendorFinder.vendorEmail === req.body.vendorEmail) && (vendorFinder => vendorFinder.vendorPassword === req.body.vendorPassword));
-  if (myVendorLogin) {
-    return res.status(200).send({
-      message: 'success',
-    });
-  }
-  return res.status(404).send({
-    message: 'vendor does not exist',
-  });
-}
+export default VendorController;

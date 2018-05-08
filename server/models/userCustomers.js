@@ -9,6 +9,7 @@ export default function (sequelize, DataTypes) {
     customerEmail: DataTypes.STRING,
     customerId: DataTypes.STRING,
     customerPassword: DataTypes.STRING,
+    customerRole: DataTypes.STRING,
   }, {});
   userCustomers.associate = function (models) {
     // associations can be defined here

@@ -1,5 +1,6 @@
 import models from '../models';
 
+
 let meals;
 models.allMeals.findAll().then((listOfMeals) => {
   meals = listOfMeals;
@@ -7,9 +8,15 @@ models.allMeals.findAll().then((listOfMeals) => {
 });
 
 export function allMeals(req, res) {
-  return res.status(200).send({
-    meals,
-    error: false,
+  console.log(req.decoded.myCustomerRole);
+  if (req.decoded.myCustomerRole === 'admin') {
+    return res.status(200).send({
+      meals,
+      error: false,
+    });
+  }
+  return res.status(403).send({
+    message: 'Sorry! You cannot access this page',
   });
 }
 

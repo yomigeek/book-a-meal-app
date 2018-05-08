@@ -9,9 +9,9 @@ const port = process.env.PORT || 5000;
 
 app.use(json());
 
-app.use('/api', require('./auth').verifyToken);
+// app.use('/api');
 
-app.use('/api/v1/meals/', require('./auth').verifyToken);
+// app.use('/api/v1/meals/');
 
 app.use(require('./routes/index').default);
 

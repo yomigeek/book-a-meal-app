@@ -1,107 +1,89 @@
 import jwt from 'jsonwebtoken';
-import { LocalStorage } from 'node-localstorage';
+import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
 
-let localStorage;
-let customers;
+let customersList;
 
-// Model to list out the list of customers
-models.userCustomers.findAll().then((listOfCustomers) => {
-  customers = listOfCustomers;
-  return listOfCustomers;
-});
-
-
-// Function to sign up new individual customers
-export function createCustomer(req, res) {
-
-  // check if name field was supplied
-  if (!req.body.customerName) {
-    return res.status(400).send({
-      message: 'Please enter a name',
-    });
-  }
-
-  // checks id the email field was supplied
-  if (!req.body.customerEmail) {
-    return res.status(400).send({
-      message: 'Please enter an email',
-    });
-  }
-
-  // checks if the password field was supplied
-  if (!req.body.customerPassword) {
-    return res.status(400).send({
-      message: 'Please enter a password',
-    });
-  }
-
+class CustomerController {
+  // Function to sign up new individual customers
+  static createCustomer(req, res) {
   // checks if the customer information already exist
-  const mycustomer = customers
-    .filter(customerFinder => customerFinder.customerName == req.body.customerName && customerFinder.customerEmail === req.body.customerEmail);
-  if (mycustomer) {
-    return res.status(409).send({
-      message: 'Customer Already Exist!',
-    });
+    models.userCustomers.findOne({
+      where: {
+        customerEmail: req.body.customerEmail,
+        customerRole: 'user',
+      },
+    })
+      .then((data) => {
+        if (data) {
+          return res.status(409).send({
+            message: 'User already exist! Try using another name or email.',
+          });
+        } else if (!data) {
+        // Password hashing using bcryptjs
+          const hashedPassword = bcrypt.hashSync(req.body.customerPassword, 10);
+          // All users
+          models.userCustomers.findAll().then((listOfCustomers) => {
+            customersList = listOfCustomers;
+          });
+          // create customer information
+          models.userCustomers.build({
+            id: customersList.length + 1,
+            customerName: req.body.customerName,
+            customerEmail: req.body.customerEmail,
+            customerPassword: hashedPassword,
+            customerRole: 'user',
+            customerId: Math.floor(Math.random() * 2000000000),
+          }).save();
+          return res.status(201).send({
+            message: 'Account has been created successfully!',
+          });
+        }
+        return res.send({
+          message: 'Taking too long to complete...',
+        });
+      })
+      .catch(err => res.status(404).send({
+        message: 'Proccess aborted',
+      }));
   }
 
-  const customerSingular = models.userCustomers.build({
-    id: customers.length + 1,
-    customerName: req.body.customerName,
-    customerEmail: req.body.customerEmail,
-    customerPassword: req.body.customerPassword,
-    customerId: Math.floor(Math.random() * 200000),
-  });
+  // Customer Login function
+  static loginCustomer(req, res) {
+    // Entered user password hash
+    models.userCustomers.findOne({
+      where: {
+        customerEmail: req.body.customerEmail,
+      },
+    })
+      .then((data) => {
+        const comparedpassword = bcrypt.compareSync(req.body.customerPassword, data.dataValues.customerPassword);
 
-  // saves the details of the new customer to the database after succssful validations
-  customerSingular.save().then(newCustomer => newCustomer);
-  return res.status(200).send({
-    message: 'success',
-    customerSingular,
-  });
+        if (comparedpassword === true) {
+          const token = jwt.sign(
+            {
+              myCustomerId: data.dataValues.id,
+              myCustomerRole: data.dataValues.customerRole,
+            },
+            config.secret, {
+              expiresIn: '1hr',
+            },
+          );
+          return res.status(200).send({
+            message: 'Login successful',
+            token,
+
+          });
+        }
+        return res.status(403).send({
+          message: 'Wrong password!',
+        });
+      })
+      .catch(err => res.status(404).send({
+        message: 'Customer does not exist',
+      }));
+  }
 }
 
-
-// Customer Login function
-export function loginCustomer(req, res) {
-// Check if email was supplied by the user
-  if (!req.body.customerEmail) {
-    return res.status(400).send({
-      message: 'Please enter an email',
-    });
-  }
-
-// Check if password was supplied by the user
-  if (!req.body.customerPassword) {
-    return res.status(400).send({
-      message: 'Please enter a password',
-    });
-  }
-
-  // Check if customer exist already
-  const myCustomerLogin = customers.find(customerFinder => customerFinder.customerEmail == req.body.customerEmail && customerFinder.customerPassword == req.body.customerPassword);
-
-  if (myCustomerLogin) {
-    const token = jwt.sign(
-      {
-        myCustomerEmail: req.body.customerEmail,
-      },
-      config.secret, {
-        expiresIn: (24 * 60 * 60),
-      },
-    );
-    if (typeof (localStorage) === 'undefined' || localStorage === null) {
-      localStorage = new LocalStorage('./scratch');
-    }
-    localStorage.setItem('tokenValue', token);
-    return res.status(200).send({
-      message: 'success',
-      tokenValue: localStorage.getItem('tokenValue'),
-
-    });
-  }
-  return res.status(404).send({
-    message: 'customer does not exist',
-  });
-}
+export default CustomerController;
