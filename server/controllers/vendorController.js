@@ -2,17 +2,18 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
+import db from '../db/myDb';
+
 
 let customersList;
 
 class VendorController {
   static createVendor(req, res) {
   // checks if the customer information already exist
-    models.userCustomers.findOne({
+    db.admin.findOne({
       where: {
         customerEmail: req.body.customerEmail,
         customerRole: 'admin',
-        customerName: req.body.customerName,
       },
     })
       .then((data) => {
@@ -23,29 +24,25 @@ class VendorController {
         } else if (!data) {
           // Password hashing using bcryptjs
           const hashedPassword = bcrypt.hashSync(req.body.customerPassword, 10);
-          // All users
-          models.userCustomers.findAll().then((listOfCustomers) => {
-            customersList = listOfCustomers;
-          });
+
           // create customer information
-          models.userCustomers.build({
-            id: customersList.length + 1,
+          const customerSystemId = Math.floor(Math.random() * 2000000000);
+
+          models.users.build({
+            id: customerSystemId,
             customerName: req.body.customerName,
             customerEmail: req.body.customerEmail,
             customerPassword: hashedPassword,
             customerRole: 'admin',
-            customerId: Math.floor(Math.random() * 2000000000),
+            customerId: customerSystemId,
           }).save();
           return res.status(201).send({
             message: 'Account has been created successfully!',
           });
         }
-        return res.send({
-          message: 'Taking too long to complete...',
-        });
       })
       .catch(err => res.status(404).send({
-        message: 'Proccess aborted',
+        message: 'Proccess aborted in vendor',
       }));
   }
 
@@ -53,7 +50,7 @@ class VendorController {
   // Vendor Login function
   static loginVendor(req, res) {
     // Entered user password hash
-    models.userCustomers.findOne({
+    db.admin.findOne({
       where: {
         customerEmail: req.body.customerEmail,
       },

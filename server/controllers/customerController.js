@@ -3,13 +3,11 @@ import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
 
-let customersList;
-
 class CustomerController {
   // Function to sign up new individual customers
   static createCustomer(req, res) {
   // checks if the customer information already exist
-    models.userCustomers.findOne({
+    models.users.findOne({
       where: {
         customerEmail: req.body.customerEmail,
         customerRole: 'user',
@@ -23,18 +21,15 @@ class CustomerController {
         } else if (!data) {
         // Password hashing using bcryptjs
           const hashedPassword = bcrypt.hashSync(req.body.customerPassword, 10);
-          // All users
-          models.userCustomers.findAll().then((listOfCustomers) => {
-            customersList = listOfCustomers;
-          });
           // create customer information
-          models.userCustomers.build({
-            id: customersList.length + 1,
+          const customerSystemId = Math.random().toString(36).slice(-5);
+          models.users.build({
+            id: customerSystemId,
             customerName: req.body.customerName,
             customerEmail: req.body.customerEmail,
             customerPassword: hashedPassword,
             customerRole: 'user',
-            customerId: Math.floor(Math.random() * 2000000000),
+            customerId: customerSystemId,
           }).save();
           return res.status(201).send({
             message: 'Account has been created successfully!',
@@ -52,7 +47,7 @@ class CustomerController {
   // Customer Login function
   static loginCustomer(req, res) {
     // Entered user password hash
-    models.userCustomers.findOne({
+    models.users.findOne({
       where: {
         customerEmail: req.body.customerEmail,
       },
@@ -67,7 +62,7 @@ class CustomerController {
               myCustomerRole: data.dataValues.customerRole,
             },
             config.secret, {
-              expiresIn: '1hr',
+              expiresIn: '6hr',
             },
           );
           return res.status(200).send({

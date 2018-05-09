@@ -1,5 +1,3 @@
-
-
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('allMeals', {
     id: {
@@ -11,15 +9,23 @@ module.exports = {
 
     mealName: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
     mealPrice: {
       type: Sequelize.INTEGER,
+      allowNull: false,
     },
     mealImage: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
     mealId: {
       type: Sequelize.STRING,
+      allowNull: false,
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     },
     createdAt: {
       allowNull: false,

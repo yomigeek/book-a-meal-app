@@ -1,110 +1,145 @@
-import models from '../models';
+import db from '../db/myDb';
 
-
-let meals;
-models.allMeals.findAll().then((listOfMeals) => {
-  meals = listOfMeals;
-  return meals;
-});
-
-export function allMeals(req, res) {
-  console.log(req.decoded.myCustomerRole);
-  if (req.decoded.myCustomerRole === 'admin') {
-    return res.status(200).send({
-      meals,
-      error: false,
+class MealsController {
+  static allMeals(req, res) {
+    db.meals.findAll({
+      where: {
+        userId: req.decoded.myCustomerId,
+      },
+    }).then((mealList) => {
+      if (mealList.length < 1) {
+        return res.send({
+          message: 'No Meal exist for this user!',
+        });
+      }
+      return res.send({
+        mealList,
+      });
     });
   }
-  return res.status(403).send({
-    message: 'Sorry! You cannot access this page',
-  });
+
+  static addAMeal(req, res) {
+    db.meals.findAll({
+      where: {
+        userId: req.decoded.myCustomerId,
+        mealName: req.body.mealName,
+      },
+    })
+      .then((data) => {
+        if (data.length > 0) {
+          return res.status(409).send({
+            message: 'Meal already exist for this user!',
+          });
+        } else if (data.length < 1) {
+          // create customer information
+          const mealSystemId = Math.floor(Math.random() * 2000000000);
+          db.meals.build({
+            id: mealSystemId,
+            mealName: req.body.mealName,
+            mealPrice: req.body.mealPrice,
+            mealImage: req.body.mealImage,
+            mealId: mealSystemId,
+            userId: req.decoded.myCustomerId,
+            userCustomerId: req.decoded.myCustomerId,
+          }).save();
+          return res.status(201).send({
+            message: 'Meal created successfully!',
+          });
+        }
+        return res.send({
+          message: 'Taking too long to complete...',
+        });
+      })
+      .catch(err => res.status(404).send({
+        err,
+      }));
+  }
+
+
+  static getMealById(req, res) {
+    db.meals.findAll({
+      where: {
+        userId: req.decoded.myCustomerId,
+        id: req.params.mealId,
+      },
+    })
+      .then((data) => {
+        if (data.length <= 0) {
+          return res.status(404).send({
+            message: 'Oops! Meal not found or not available.',
+          });
+        } else if (data.length > 0) {
+          // Show meal information
+          return res.status(201).send({
+            data,
+          });
+        }
+        return true;
+      })
+      .catch(err => res.send({
+        err,
+      }));
+  }
+
+  static updateAMeal(req, res) {
+    db.meals.findAll({
+      where: {
+        userId: req.decoded.myCustomerId,
+        id: req.params.mealId,
+      },
+    })
+      .then((data) => {
+        if (data.length <= 0) {
+          return res.status(404).send({
+            message: 'Oops! Meal not found or not available.',
+          });
+        } else if (data.length >= 1) {
+          db.meals.update({
+            mealName: req.body.mealName,
+            mealPrice: req.body.mealPrice,
+            mealImage: req.body.mealImage,
+          }, {
+            where: {
+              id: req.params.mealId,
+            },
+          }).then(() => res.status(200).send({
+            message: 'Meal Update successful',
+          }));
+        }
+        return true;
+      })
+      .catch(err => res.send({
+        err,
+      }));
+  }
+
+  static deleteMeal(req, res) {
+    db.meals.findAll({
+      where: {
+        userId: req.decoded.myCustomerId,
+        id: req.params.mealId,
+      },
+    })
+      .then((data) => {
+        if (data.length <= 0) {
+          return res.status(404).send({
+            message: 'Oops! Meal not found or not available.',
+          });
+        } else if (data.length >= 1) {
+          db.meals.destroy({
+            where: {
+              id: req.params.mealId,
+            },
+          }).then(() => res.status(200).send({
+            message: 'Meal delete successful',
+          }));
+        }
+        return true;
+      })
+      .catch(err => res.send({
+        err,
+      }));
+  }
 }
 
-export function getMealById(req, res) {
-  const meal = meals.find(mealFinder => mealFinder.mealId == req.params.mealId);
-  if (!meal) {
-    res.status(404).send('Meal not found!');
-    return;
-  }
-  res.send(meal);
-}
-
-export function addAMeal(req, res) {
-  if (!req.body.mealName || req.body.mealName.length < 2) {
-    return res.status(400).send({
-      message: 'mealName is required and must be more than 2 characters',
-    });
-  }
-  if (!req.body.mealPrice) {
-    return res.status(400).send({
-      message: 'mealPrice is required!',
-    });
-  }
-  if (!req.body.mealImage) {
-    return res.status(400).send({
-      message: 'Please upload a photo for the meal!',
-    });
-  }
-  const myMeal = meals.find(m => m.mealName == req.body.mealName);
-  if (myMeal) {
-    return res.status(409).send('Meal Already Exist!');
-  }
-  const addNewMeal = models.allMeals.build({
-    id: meals.length + 1,
-    mealName: req.body.mealName,
-    mealPrice: req.body.mealPrice,
-    mealImage: req.body.mealImage,
-    mealId: Math.floor(Math.random() * 200000),
-  });
-
-  addNewMeal.save().then(newMealTask => newMealTask);
-  return res.status(200).send({
-    message: 'success',
-  });
-}
-
-export function updateAMeal(req, res) {
-  const meal = meals.find(mealFinder => mealFinder.mealId == req.params.mealId);
-  if (!meal) {
-    return res.status(404).send({
-      message: 'Meal cannot be found!',
-    });
-  }
-  if (!req.body.mealName || req.body.mealName.length < 2) {
-    return res.status(400).send({
-      message: 'MealName is required and cannot be less than 2 characters',
-    });
-  }
-  if (!req.body.mealPrice) {
-    return res.status(400).send({
-      message: 'MealPrice is required!',
-    });
-  }
-  if (!req.body.mealImage) {
-    return res.status(400).send({
-      message: 'Photo is missing!',
-    });
-  }
-  meal.mealName = req.body.mealName;
-  meal.mealPrice = req.body.mealPrice;
-  meal.mealImage = req.body.mealImage;
-  return res.send({
-    message: 'success',
-    meal,
-  });
-}
-
-export function deleteMeal(req, res) {
-  const meal = meals.find(mealFinder => mealFinder.mealId == req.params.mealId);
-  if (!meal) {
-    return res.status(404).send({
-      message: 'Meal does not exist',
-    });
-  }
-  const mealIndex = meals.indexOf(meal);
-  meals.splice(mealIndex, 1);
-  return res.send({
-    message: 'Delete successful',
-    meal,
-  });
-}
+export default MealsController;

@@ -1,18 +1,44 @@
-export default function (sequelize, DataTypes) {
-  const userCustomers = sequelize.define('userCustomers', {
+module.exports = (sequelize, DataTypes) => {
+  const users = sequelize.define('users', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+      allowNull: false,
     },
-    customerName: DataTypes.STRING,
-    customerEmail: DataTypes.STRING,
-    customerId: DataTypes.STRING,
-    customerPassword: DataTypes.STRING,
-    customerRole: DataTypes.STRING,
+    customerName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    customerEmail: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    customerId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    customerPassword: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    customerRole: {
+      type: DataTypes.ENUM,
+      values: ['user', 'admin'],
+    },
+
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+
+    updatedAt: DataTypes.DATE,
+
   }, {});
-  userCustomers.associate = function (models) {
-    // associations can be defined here
-  };
-  return userCustomers;
-}
+
+  return users;
+};

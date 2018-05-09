@@ -47,6 +47,43 @@ class Validate {
       });
     } next();
   }
+
+
+  static addMeals(req, res, next) {
+    if (!req.body.mealName || req.body.mealName.length < 2) {
+      return res.status(400).send({
+        message: 'mealName is required and must be more than 2 characters',
+      });
+    } else if (!req.body.mealPrice) {
+      return res.status(400).send({
+        message: 'mealPrice is required!',
+      });
+    } else if (!req.body.mealImage) {
+      return res.status(400).send({
+        message: 'Please upload a photo for the meal!',
+      });
+    } next();
+    return true;
+  }
+
+  static updateMeals(req, res, next) {
+    if (!req.body.mealName || req.body.mealName.length < 2) {
+      return res.send({
+        message: 'Meal Name is required and cannot be less than 2 characters',
+      });
+    }
+    if (!req.body.mealPrice) {
+      return res.send({
+        message: 'Meal Price is required!',
+      });
+    }
+    if (!req.body.mealImage) {
+      return res.status(400).send({
+        message: 'Meal Image is missing!',
+      });
+    } next();
+    return true;
+  }
 }
 
 export default Validate;

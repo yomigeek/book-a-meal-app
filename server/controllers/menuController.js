@@ -1,3 +1,5 @@
+import db from '../db/myDb';
+
 const menu = ([
 
   {
@@ -39,28 +41,32 @@ export function menuForTheDay(req, res) {
 }
 
 export function addToMenu(req, res) {
-  if (!req.body.dayOfWeek) {
-    return res.status(400).send({
-      message: 'Please select a day of the week..',
-    });
-  }
-  const myMenu = menu
-    .find((mealFinder => mealFinder.mealName === req.body.mealName) && (mealFinder => mealFinder.dayOfWeek === req.body.dayOfWeek));
-  if (myMenu) {
-    return res.status(409).send({
-      message: 'Meal already added for this day menu',
-    });
-  }
-  const menuSingular = ({
-    id: menu.length + 1,
-    mealName: req.body.mealName,
-    dayOfWeek: req.body.dayOfWeek,
-    mealPrice: req.body.mealPrice,
-    mealId: Math.floor(Math.random() * 200000),
-  });
-  menu.push(menuSingular);
-  return res.send({
-    message: 'success',
-    menuSingular,
-  });
+  const randomSystemId = Math.random().toString(36).slice(-5);
+  db.meals.findAll({
+    where: {
+      id: req.body.mealId,
+    },
+  })
+    .then((data) => {
+      console.log(data);
+      if (data.length <= 0) {
+        return res.status(409).send({
+          message: 'No Meal with this id exist!',
+        });
+      } else if (data.length > 0) {
+      // create customer information
+        db.menu.build({
+          menuId: randomSystemId,
+          mealId: req.body.mealId,
+          userId: req.decoded.myCustomerId,
+          userCustomerId: req.decoded.myCustomerId,
+        }).save();
+      }
+      return res.status(201).send({
+        message: 'Meal Added successfully!',
+      });
+    })
+    .catch(res.send({
+      message: 'catch message!',
+    }));
 }
