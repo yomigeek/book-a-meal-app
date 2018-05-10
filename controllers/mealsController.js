@@ -2,7 +2,7 @@ import models from '../models';
 
 class MealsController {
   static allMeals(req, res) {
-    models.meals.findOne({
+    models.allMeals.findOne({
       where: {
         userId: req.decoded.myCustomerId,
       },
@@ -19,7 +19,7 @@ class MealsController {
   }
 
   static addAMeal(req, res) {
-    models.meals.findOne({
+    models.allMeals.findOne({
       where: {
         userId: req.decoded.myCustomerId,
         mealName: req.body.mealName,
@@ -33,7 +33,7 @@ class MealsController {
         }
         // create meal information
         const mealSystemId = Math.floor(Math.random() * 200000);
-        models.meals.build({
+        models.allMeals.build({
           id: mealSystemId,
           mealName: req.body.mealName,
           mealPrice: req.body.mealPrice,
@@ -56,7 +56,7 @@ class MealsController {
 
 
   static getMealById(req, res) {
-    models.meals.findOne({
+    models.allMeals.findOne({
       where: {
         userId: req.decoded.myCustomerId,
         id: req.params.mealId,
@@ -80,7 +80,7 @@ class MealsController {
   }
 
   static updateAMeal(req, res) {
-    models.meals.findAll({
+    models.allMeals.findOne({
       where: {
         userId: req.decoded.myCustomerId,
         id: req.params.mealId,
@@ -92,7 +92,7 @@ class MealsController {
             message: 'Oops! Meal not found or not available.',
           });
         }
-        models.meals.update({
+        models.allMeals.update({
           mealName: req.body.mealName,
           mealPrice: req.body.mealPrice,
           mealImage: req.body.mealImage,
@@ -115,7 +115,7 @@ class MealsController {
   }
 
   static deleteMeal(req, res) {
-    models.meals.findAll({
+    models.allMeals.findAll({
       where: {
         userId: req.decoded.myCustomerId,
         id: req.params.mealId,
@@ -127,7 +127,7 @@ class MealsController {
             message: 'Oops! Meal not found or not available.',
           });
         }
-        models.meals.destroy({
+        models.allMeals.destroy({
           where: {
             id: req.params.mealId,
           },
