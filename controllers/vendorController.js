@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
-import db from '../db/myDb';
+import db from '../models/index';
 
 
 let customersList;
