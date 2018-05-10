@@ -11,7 +11,7 @@ require('dotenv').config();
 // so everything is accessible via one object
 const db = {};
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, config);
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD);
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
