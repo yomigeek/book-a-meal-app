@@ -1,6 +1,9 @@
 {
   "name": "book",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.1"
+  },
   "description": "book a meal app",
   "main": "app.js",
   "scripts": {
