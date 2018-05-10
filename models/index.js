@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const env = process.env.NODE_ENV || 'development';
 
-const config = require('../config/config')[env];
+const config = require('../config/config.json')[env];
   
 require('dotenv').config();
 
@@ -11,8 +11,13 @@ require('dotenv').config();
 // so everything is accessible via one object
 const db = {};
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, config);
-
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  sequelize = new Sequelize(
+    config.database, config.username, config.password, config
+  );
+}
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
