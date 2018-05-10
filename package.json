@@ -9,9 +9,9 @@
   "scripts": {
     "test": "set NODE_ENV=test&&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/testApp.js --exit",
     "build": "rimraf dist/ && babel --presets=es2015 ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "node ./dist/bin/www",
+    "start": "npm run build && node app.js",
     "babel-node": "babel-node --presets=es2015",
-    "start:dev": "nodemon --exec npm run babel-node -- ./bin/www",
+    "start:dev": "nodemon --exec npm run babel-node -- app.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "heroku-postbuild": "sequelize db:migrate"
     
