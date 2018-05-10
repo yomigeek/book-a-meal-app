@@ -1,8 +1,7 @@
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
-import db from '../db/myDb';
 
 class CustomerController {
   // Function to sign up new individual customers
@@ -53,13 +52,14 @@ class CustomerController {
       },
     })
       .then((data) => {
+      console.log(data);
         if (!data) {
           return res.status(404).send({
             message: 'This user not found. Wrong Information!',
           });
         }
         const comparedpassword = bcrypt.compareSync(req.body.customerPassword, data.dataValues.customerPassword);
-        if (comparedpassword === true) {
+        if (comparedpassword) {
           const token = jwt.sign(
             {
               myCustomerId: data.dataValues.id,
