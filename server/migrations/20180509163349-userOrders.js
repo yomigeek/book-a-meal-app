@@ -37,6 +37,11 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+
+    formattedDate: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
   }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('userOrders'),
 };

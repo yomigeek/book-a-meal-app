@@ -10,6 +10,7 @@ class Checkrole {
         message: 'Unauthorized access',
       });
     } next();
+    return true;
   }
 }
 

@@ -18,7 +18,6 @@ module.exports = {
     customerId: {
       type: Sequelize.STRING,
       allowNull: false,
-
     },
     customerPassword: {
       type: Sequelize.STRING,

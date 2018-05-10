@@ -17,6 +17,7 @@ class Validate {
         message: 'Password cannot be empty!',
       });
     } next();
+    return true;
   }
 
   static userSignUp(req, res, next) {
@@ -46,6 +47,7 @@ class Validate {
         message: 'Name cannot be less than two characters!',
       });
     } next();
+    return true;
   }
 
 
@@ -80,6 +82,18 @@ class Validate {
     if (!req.body.mealImage) {
       return res.status(400).send({
         message: 'Meal Image is missing!',
+      });
+    } next();
+    return true;
+  }
+
+  static checkTime(req, res, next) {
+    const myDate = new Date(); // for now
+    const myHours = myDate.getHours();
+
+    if (myHours > 14) {
+      return res.send({
+        message: 'Order has closed for the day! Check back tommorrow',
       });
     } next();
     return true;

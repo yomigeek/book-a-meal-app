@@ -1,9 +1,9 @@
 import express from 'express';
-import { allOrders, updateOrder, addOrder } from '../controllers/ordersController';
 import CustomerController from '../controllers/customerController';
 import VendorController from '../controllers/vendorController';
 import MealController from '../controllers/mealsController';
 import MenuController from '../controllers/menuController';
+import OrderController from '../controllers/ordersController';
 import verifyToken from '../auth';
 import Validate from '../validations/validate';
 import CheckRole from '../validations/checkRole';
@@ -33,9 +33,9 @@ router.post('/api/v1/menu', verifyToken, CheckRole.checkAdmin, MenuController.ad
 router.get('/api/v1/menu/', verifyToken, MenuController.menuForTheDay);
 
 // Orders API Routes
-router.post('/api/v1/orders', verifyToken, addOrder);
-router.get('/api/v1/orders', verifyToken, allOrders);
-router.put('/api/v1/orders/:orderId', verifyToken, updateOrder);
+router.post('/api/v1/orders', verifyToken, Validate.checkTime, OrderController.addOrder);
+router.get('/api/v1/orders', verifyToken, CheckRole.checkAdmin, OrderController.allOrders);
+router.put('/api/v1/orders/:orderId', verifyToken, OrderController.updateOrder);
 
 
 export default router;

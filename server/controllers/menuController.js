@@ -16,23 +16,19 @@ class MenuController {
       ],
     })
       .then((allMenuData) => {
-        console.log(allMenuData);
+        // Console.log(allMenuData);
         if (allMenuData.length < 1) {
           return res.send({
             message: 'No Meal exist for today menu. Please check back later.',
           });
         }
-        const resObj = allMenuData.map(menuInfo => Object.assign(
-          {
-            allMenuData,
-            mealInfo: menuInfo.meals.map(getMeals => Object.assign(
-              {
-                getMeals,
+        const resObj = allMenuData.map(menuInfo => Object.assign({
+          allMenuData,
+          mealInfo: menuInfo.meals.map(getMeals => Object.assign({
+            getMeals,
 
-              },
-            )),
-          },
-        ));
+          })),
+        }));
         res.json(resObj);
         return true;
       });

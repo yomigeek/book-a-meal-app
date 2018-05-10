@@ -33,7 +33,7 @@ class MealsController {
           });
         } else if (data.length < 1) {
           // create meal information
-          const mealSystemId = Math.floor(Math.random() * 2000000000);
+          const mealSystemId = Math.floor(Math.random() * 200000);
           db.meals.build({
             id: mealSystemId,
             mealName: req.body.mealName,

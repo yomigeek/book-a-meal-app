@@ -38,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
 
+    formattedDate: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
   }, {});
 
   return orders;
