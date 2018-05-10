@@ -8,10 +8,13 @@
   "main": "app.js",
   "scripts": {
     "test": "set NODE_ENV=test&&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/testApp.js --exit",
-    "build": "rimraf dist/ ",
-    "start": "npm run build && node app.js",
+    "build": "rimraf dist/ && babel --presets=es2015 ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "start": "node ./dist/bin/www",
+    "babel-node": "babel-node --presets=es2015",
+    "start:dev": "nodemon --exec npm run babel-node -- ./bin/www",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "heroku-postbuild": "sequelize db:migrate"
+    
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -46,20 +49,5 @@
     "request": "^2.85.0",
     "rimraf": "^2.6.2",
     "should": "^13.2.1"
-  },
-  "rules": {
-    "linebreak-style": 0,
-    "global-require": 0,
-    "eslint linebreak-style": [
-      0,
-      "error",
-      "windows"
-    ]
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "node": true
-    }
   }
 }
