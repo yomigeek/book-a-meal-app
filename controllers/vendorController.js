@@ -50,7 +50,7 @@ class VendorController {
   // Vendor Login function
   static loginVendor(req, res) {
     // Entered user password hash
-    models.users.findOne({
+    db.users.find({
       where: {
         customerEmail: req.body.customerEmail,
         customerRole: 'admin',
