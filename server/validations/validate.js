@@ -17,7 +17,6 @@ class Validate {
         message: 'Password cannot be empty!',
       });
     } next();
-    return true;
   }
 
   static userSignUp(req, res, next) {
@@ -38,6 +37,10 @@ class Validate {
       return res.status(400).send({
         message: 'Password cannot be empty!',
       });
+    } else if (customerPassword.length < 6) {
+      return res.status(400).send({
+        message: 'Password length must be up to 6 characters!',
+      });
     } else if (!customerName) {
       return res.status(400).send({
         message: 'Name cannot be empty!',
@@ -47,7 +50,6 @@ class Validate {
         message: 'Name cannot be less than two characters!',
       });
     } next();
-    return true;
   }
 
 
@@ -65,7 +67,6 @@ class Validate {
         message: 'Please upload a photo for the meal!',
       });
     } next();
-    return true;
   }
 
   static updateMeals(req, res, next) {
@@ -84,14 +85,42 @@ class Validate {
         message: 'Meal Image is missing!',
       });
     } next();
-    return true;
+  }
+  static addOrder(req, res, next) {
+    if (!req.body.mealId) {
+      return res.send({
+        message: 'MealId cannot be empty!',
+      });
+    }
+    if (!req.body.quantity) {
+      return res.send({
+        message: 'Meal quantity is required!',
+      });
+    }
+    if (typeof (req.body.quantity) === 'string') {
+      return res.status(400).send({
+        message: 'Meal quantity cannot be a string type. Must be a number!',
+      });
+    } next();
+  }
+  static updateOrder(req, res, next) {
+    if (!req.body.quantity) {
+      return res.send({
+        message: 'The meal quantity is required!',
+      });
+    }
+    if (typeof (req.body.quantity) === 'string') {
+      return res.status(400).send({
+        message: 'Meal quantity cannot be a string type. Must be a number!',
+      });
+    } next();
   }
 
   static checkTime(req, res, next) {
     const myDate = new Date(); // for now
     const myHours = myDate.getHours();
 
-    if (myHours > 14) {
+    if (myHours > 18) {
       return res.send({
         message: 'Order has closed for the day! Check back tommorrow',
       });

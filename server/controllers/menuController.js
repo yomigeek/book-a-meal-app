@@ -5,32 +5,26 @@ class MenuController {
   static menuForTheDay(req, res) {
     const currentDate = new Date();
     const formattedTodaysDate = currentDate.toISOString().slice(0, 10);
-    db.menu.findAll({
+    db.menu.findOne({
       where: {
         formattedDate: formattedTodaysDate,
       },
-      include: [
-        {
-          model: db.meals,
-        },
-      ],
     })
       .then((allMenuData) => {
-        // Console.log(allMenuData);
-        if (allMenuData.length < 1) {
-          return res.send({
-            message: 'No Meal exist for today menu. Please check back later.',
-          });
-        }
-        const resObj = allMenuData.map(menuInfo => Object.assign({
-          allMenuData,
-          mealInfo: menuInfo.meals.map(getMeals => Object.assign({
-            getMeals,
+        db.meals.findAll({
+          where: {
+            mealId: allMenuData.mealId,
+          },
+        }).then((mealsData) => {
+          const finalData = {
+            menuId: allMenuData.menuId,
+            mealsData,
 
-          })),
-        }));
-        res.json(resObj);
-        return true;
+          };
+          return res.status(409).send({
+            finalData,
+          });
+        });
       });
   }
 
@@ -47,58 +41,56 @@ class MenuController {
           return res.status(409).send({
             message: 'No Meal with this id exist!',
           });
-        } else if (data.length > 0) {
-          // create customer information
-          db.menu.findOne({
-            where: {
-              mealId: req.body.mealId,
-            },
-          }).then((menuData) => {
+        }
+        // create customer information
+        db.menu.findOne({
+          where: {
+            mealId: req.body.mealId,
+          },
+        }).then((menuData) => {
           // If meal doesn't exist in the menu, add to the specfic day menu
-            if (menuData === null) {
-              const myDate = new Date();
-              const todaysDate = myDate.toISOString().slice(0, 10);
-              db.menu.build({
-                id: req.body.mealId,
-                menuId: randomSystemId,
-                mealId: req.body.mealId,
-                userId: req.decoded.myCustomerId,
-                userCustomerId: req.decoded.myCustomerId,
-                formattedDate: todaysDate,
-              }).save();
-
-              return res.status(201).send({
-                message: 'Meal added to current menu successfully!',
-              });
-            }
-            /* If meal exist in the menu, check if meal has been added to the
-          specific day menu via comparing date */
-
-            const createdDate = menuData.dataValues.createdAt;
-            const formattedDate = createdDate.toISOString().slice(0, 10);
+          if (!menuData) {
             const myDate = new Date();
             const todaysDate = myDate.toISOString().slice(0, 10);
-            if (formattedDate == todaysDate) {
-              return res.status(409).send({
-                message: 'Meal Already added to todays menu!',
-              });
-            }
             db.menu.build({
               id: req.body.mealId,
               menuId: randomSystemId,
               mealId: req.body.mealId,
               userId: req.decoded.myCustomerId,
-              userCustomerId: req.decoded.myCustomerId,
               formattedDate: todaysDate,
             }).save();
 
             return res.status(201).send({
               message: 'Meal added to current menu successfully!',
+
             });
+          }
+          /* If meal exist in the menu, check if meal has been added to the
+          specific day menu via comparing date */
+
+          const createdDate = menuData.dataValues.createdAt;
+          const formattedDate = createdDate.toISOString().slice(0, 10);
+          const myDate = new Date();
+          const todaysDate = myDate.toISOString().slice(0, 10);
+          if (formattedDate == todaysDate) {
+            return res.status(409).send({
+              message: 'Meal Already added to todays menu!',
+            });
+          }
+          db.menu.build({
+            id: req.body.mealId,
+            menuId: randomSystemId,
+            mealId: req.body.mealId,
+            userId: req.decoded.myCustomerId,
+            formattedDate: todaysDate,
+          }).save();
+
+          return res.status(200).send({
+            message: 'Meal added to current menu successfully!',
           });
-        } return true;
+        });
       })
-      .catch(err => res.send({
+      .catch(err => res.status(400).send({
         err,
       }));
   }

@@ -14,7 +14,9 @@ export default function verifyToken(req, res, next) {
       return next();
     });
   } else {
-    res.redirect(401, '/');
+    return res.status(401).send({
+      message: 'Unauthorized Acces! You are not allowed to access this page.',
+    });
   }
 }
 

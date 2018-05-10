@@ -22,11 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
 
-    userCustomerId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,

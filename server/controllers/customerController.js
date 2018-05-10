@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
+import db from '../db/myDb';
 
 class CustomerController {
   // Function to sign up new individual customers
@@ -18,29 +19,27 @@ class CustomerController {
           return res.status(409).send({
             message: 'User already exist! Try using another name or email.',
           });
-        } else if (!data) {
-        // Password hashing using bcryptjs
-          const hashedPassword = bcrypt.hashSync(req.body.customerPassword, 10);
-          // create customer information
-          const customerSystemId = Math.random().toString(36).slice(-5);
-          models.users.build({
-            id: customerSystemId,
-            customerName: req.body.customerName,
-            customerEmail: req.body.customerEmail,
-            customerPassword: hashedPassword,
-            customerRole: 'user',
-            customerId: customerSystemId,
-          }).save();
-          return res.status(201).send({
-            message: 'Account has been created successfully!',
-          });
         }
-        return res.send({
-          message: 'Taking too long to complete...',
+        // Password hashing using bcryptjs
+        const hashedPassword = bcrypt.hashSync(req.body.customerPassword, 10);
+        // create customer information
+        const customerSystemId = Math.floor(Math.random() * 2000000);
+        models.users.build({
+          id: customerSystemId,
+          customerName: req.body.customerName,
+          customerEmail: req.body.customerEmail,
+          customerPassword: hashedPassword,
+          customerRole: 'user',
+          customerId: customerSystemId,
+        }).save();
+        return res.status(201).send({
+          message: 'Account has been created successfully!',
+          customerName: req.body.customerName,
+          customerEmail: req.body.customerEmail,
         });
       })
       .catch(err => res.status(404).send({
-        message: 'Proccess aborted',
+        err,
       }));
   }
 
@@ -50,11 +49,16 @@ class CustomerController {
     models.users.findOne({
       where: {
         customerEmail: req.body.customerEmail,
+        customerRole: 'user',
       },
     })
       .then((data) => {
+        if (!data) {
+          return res.status(404).send({
+            message: 'This user not found. Wrong Information!',
+          });
+        }
         const comparedpassword = bcrypt.compareSync(req.body.customerPassword, data.dataValues.customerPassword);
-
         if (comparedpassword === true) {
           const token = jwt.sign(
             {
@@ -62,7 +66,7 @@ class CustomerController {
               myCustomerRole: data.dataValues.customerRole,
             },
             config.secret, {
-              expiresIn: '6hr',
+              expiresIn: '48h',
             },
           );
           return res.status(200).send({
@@ -75,8 +79,8 @@ class CustomerController {
           message: 'Wrong password!',
         });
       })
-      .catch(err => res.status(404).send({
-        message: 'Customer does not exist',
+      .catch(err => res.status(400).send({
+        err,
       }));
   }
 }

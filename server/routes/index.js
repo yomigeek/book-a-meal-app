@@ -33,9 +33,9 @@ router.post('/api/v1/menu', verifyToken, CheckRole.checkAdmin, MenuController.ad
 router.get('/api/v1/menu/', verifyToken, MenuController.menuForTheDay);
 
 // Orders API Routes
-router.post('/api/v1/orders', verifyToken, Validate.checkTime, OrderController.addOrder);
+router.post('/api/v1/orders', verifyToken, Validate.checkTime, Validate.addOrder, OrderController.addOrder);
 router.get('/api/v1/orders', verifyToken, CheckRole.checkAdmin, OrderController.allOrders);
-router.put('/api/v1/orders/:orderId', verifyToken, OrderController.updateOrder);
+router.put('/api/v1/orders/:orderId', verifyToken, Validate.updateOrder, OrderController.updateOrder);
 
 
 export default router;

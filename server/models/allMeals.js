@@ -24,11 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
     mealId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
-    userCustomerId: {
-      type: DataTypes.INTEGER,
+      primaryKey: true,
       allowNull: false,
     },
 

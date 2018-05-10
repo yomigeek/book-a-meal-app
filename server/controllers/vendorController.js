@@ -26,7 +26,7 @@ class VendorController {
           const hashedPassword = bcrypt.hashSync(req.body.customerPassword, 10);
 
           // create customer information
-          const customerSystemId = Math.floor(Math.random() * 2000000000);
+          const customerSystemId = Math.floor(Math.random() * 2000000);
 
           models.users.build({
             id: customerSystemId,
@@ -50,12 +50,19 @@ class VendorController {
   // Vendor Login function
   static loginVendor(req, res) {
     // Entered user password hash
-    db.admin.findOne({
+    models.users.findOne({
       where: {
         customerEmail: req.body.customerEmail,
+        customerRole: 'admin',
       },
     })
       .then((data) => {
+        if (!data) {
+          return res.status(404).send({
+            message: 'This user not found. Wrong Information!',
+          });
+        }
+
         const comparedpassword = bcrypt.compareSync(req.body.customerPassword, data.dataValues.customerPassword);
 
         if (comparedpassword === true) {
@@ -74,12 +81,13 @@ class VendorController {
 
           });
         }
+
         return res.status(403).send({
           message: 'Wrong password!',
         });
       })
       .catch(err => res.status(404).send({
-        message: 'Customer does not exist',
+        err,
       }));
   }
 }

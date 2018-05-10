@@ -9,11 +9,11 @@ class OrderController {
       },
     }).then((ordersList) => {
       if (ordersList.length < 1) {
-        return res.send({
-          message: 'No Meal exist for this user!',
+        return res.status(404).send({
+          message: 'No orders exist for this user!',
         });
       }
-      return res.send({
+      return res.status(200).send({
         ordersList,
       });
     });
@@ -27,54 +27,39 @@ class OrderController {
       },
     })
       .then((data) => {
-        if (data == null) {
-          return res.send({
+        if (!data) {
+          return res.status(404).send({
             message: 'This meal does not exist!',
           });
         } else if (data != null) {
-          const myDate = new Date();
-          const todaysDate = myDate.toISOString().slice(0, 10);
-          db.orders.findAll({
+          models.allMeals.findOne({
             where: {
               mealId: req.body.mealId,
-              formattedDate: todaysDate,
             },
-          }).then((newData) => {
-            if (newData.length > 0) {
-              return res.send({
-                message: 'You have already ordered this meal today! Preferaably, edit the order in the cart.',
-              });
-            }
-
-            models.allMeals.findOne({
-              where: {
-                mealId: req.body.mealId,
-              },
-            }).then((mealDataForOrder) => {
+          }).then((mealDataForOrder) => {
             // create order information
-              const orderSystemId = Math.floor(Math.random() * 20000);
-              db.orders.build({
-                id: orderSystemId,
-                orderId: orderSystemId,
-                quantity: req.body.quantity,
-                mealId: req.body.mealId,
-                adminId: mealDataForOrder.dataValues.userId,
-                userId: req.decoded.myCustomerId,
-                formattedDate: todaysDate,
-              }).save();
-              return res.send({
-                message: 'Order has been placed successfully!',
-              });
+            const myDate = new Date();
+            const todaysDate = myDate.toISOString().slice(0, 10);
+            const orderSystemId = Math.floor(Math.random() * 20000);
+            db.orders.build({
+              id: orderSystemId,
+              orderId: orderSystemId,
+              quantity: req.body.quantity,
+              mealId: req.body.mealId,
+              adminId: mealDataForOrder.dataValues.userId,
+              userId: req.decoded.myCustomerId,
+              formattedDate: todaysDate,
+            }).save();
+            return res.status(201).send({
+              message: 'Order has been placed successfully!',
             });
-            return true;
           });
         }
-        return true;
       });
   }
 
   static updateOrder(req, res) {
-    db.orders.findAll({
+    db.orders.findOne({
       where: {
         id: req.params.orderId,
       },
@@ -84,21 +69,28 @@ class OrderController {
           return res.status(404).send({
             message: 'Oops! Order not found.',
           });
-        } else if (data.length >= 1) {
-          db.orders.update({
-            quantity: req.body.quantity,
-
-          }, {
-            where: {
-              id: req.params.orderId,
-            },
-          }).then(() => res.status(200).send({
-            message: 'Order Updated successfully',
-          }));
         }
-        return true;
+        const myDate = new Date();
+        const todaysDate = myDate.getHours();
+        const orderDate = data.dataValues.createdAt.getHours();
+        const dateDifference = todaysDate - orderDate;
+        if (dateDifference > 2) {
+          return res.status(404).send({
+            message: 'Oops! The duration for modifing the orders has passed.',
+          });
+        }
+        db.orders.update({
+          quantity: req.body.quantity,
+
+        }, {
+          where: {
+            id: req.params.orderId,
+          },
+        }).then(() => res.status(200).send({
+          message: 'Order Updated successfully',
+        }));
       })
-      .catch(err => res.send({
+      .catch(err => res.status(400).send({
         err,
       }));
   }
