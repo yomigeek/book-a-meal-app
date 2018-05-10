@@ -2,8 +2,6 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
-import db from '../models/index';
-
 
 let customersList;
 
@@ -50,7 +48,7 @@ class VendorController {
   // Vendor Login function
   static loginVendor(req, res) {
     // Entered user password hash
-    db.users.find({
+    models.users.findOne({
       where: {
         customerEmail: req.body.customerEmail,
         customerRole: 'admin',
