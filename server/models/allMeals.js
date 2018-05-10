@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     mealId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
 
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     userId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
 

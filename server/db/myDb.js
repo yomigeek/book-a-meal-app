@@ -17,16 +17,15 @@ db.sequelize = sequelize;
 db.meals = require('../models/allMeals')(sequelize, Sequelize);
 db.admin = require('../models/userCustomers')(sequelize, Sequelize);
 db.menu = require('../models/menu')(sequelize, Sequelize);
+db.orders = require('../models/orders')(sequelize, Sequelize);
 // Relations
 db.admin.hasMany(db.meals);
 db.meals.belongsTo(db.admin);
-db.meals.belongsTo(db.menu, {
-  foreignKey: {
-    name: [
-      'mealId',
-    ],
-    allowNull: false,
-  },
-
+db.menu.hasMany(db.meals, {
+  foreignKey: 'mealId',
 });
+db.meals.belongsToMany(db.menu, {
+  through: 'mealId',
+});
+
 module.exports = db;

@@ -20,11 +20,11 @@ module.exports = {
       allowNull: false,
     },
     mealId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     userId: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     createdAt: {

@@ -32,6 +32,11 @@ module.exports = {
     },
 
     updatedAt: Sequelize.DATE,
+
+    formattedDate: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
   }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('userMenus'),
 };

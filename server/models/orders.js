@@ -1,28 +1,27 @@
-
 module.exports = (sequelize, DataTypes) => {
-  const menu = sequelize.define('userMenus', {
+  const orders = sequelize.define('userOrders', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
-    menuId: {
-      type: DataTypes.STRING,
+    orderId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
 
     mealId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
 
     userId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    userCustomerId: {
+    adminId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -34,12 +33,13 @@ module.exports = (sequelize, DataTypes) => {
 
     updatedAt: DataTypes.DATE,
 
-    formattedDate: {
-      type: DataTypes.STRING,
+    quantity: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
 
   }, {});
 
-  return menu;
+  return orders;
 };
+

@@ -26,12 +26,13 @@ class MealsController {
       },
     })
       .then((data) => {
+        console.log(data);
         if (data.length > 0) {
           return res.status(409).send({
             message: 'Meal already exist for this user!',
           });
         } else if (data.length < 1) {
-          // create customer information
+          // create meal information
           const mealSystemId = Math.floor(Math.random() * 2000000000);
           db.meals.build({
             id: mealSystemId,

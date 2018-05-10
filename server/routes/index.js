@@ -1,11 +1,9 @@
 import express from 'express';
-// import { LocalStorage } from 'node-localstorage';
-import { allMeals, getMealById, addAMeal, updateAMeal, deleteMeal } from '../controllers/mealsController';
-import { allMenu, menuForTheDay, addToMenu } from '../controllers/menuController';
 import { allOrders, updateOrder, addOrder } from '../controllers/ordersController';
 import CustomerController from '../controllers/customerController';
 import VendorController from '../controllers/vendorController';
 import MealController from '../controllers/mealsController';
+import MenuController from '../controllers/menuController';
 import verifyToken from '../auth';
 import Validate from '../validations/validate';
 import CheckRole from '../validations/checkRole';
@@ -31,14 +29,13 @@ router.put('/api/v1/meals/:mealId', verifyToken, CheckRole.checkAdmin, MealContr
 router.delete('/api/v1/meals/:mealId', verifyToken, CheckRole.checkAdmin, MealController.deleteMeal);
 
 // Menu API Routes
-router.post('/api/v1/menu', verifyToken, CheckRole.checkAdmin, addToMenu);
-router.get('/api/v1/menu', verifyToken, allMenu);
-router.get('/api/v1/menu/:id', verifyToken, menuForTheDay);
+router.post('/api/v1/menu', verifyToken, CheckRole.checkAdmin, MenuController.addToMenu);
+router.get('/api/v1/menu/', verifyToken, MenuController.menuForTheDay);
 
 // Orders API Routes
+router.post('/api/v1/orders', verifyToken, addOrder);
 router.get('/api/v1/orders', verifyToken, allOrders);
 router.put('/api/v1/orders/:orderId', verifyToken, updateOrder);
-router.post('/api/v1/orders', verifyToken, addOrder);
 
 
 export default router;

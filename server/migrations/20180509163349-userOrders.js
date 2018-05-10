@@ -7,22 +7,22 @@ module.exports = {
       allowNull: false,
     },
     orderId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
 
     mealId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
 
     userId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
 
     adminId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
 
@@ -32,6 +32,11 @@ module.exports = {
     },
 
     updatedAt: Sequelize.DATE,
+
+    quantity: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
   }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('userOrders'),
 };
