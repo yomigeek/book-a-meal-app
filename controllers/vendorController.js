@@ -8,7 +8,7 @@ let customersList;
 class VendorController {
   static createVendor(req, res) {
   // checks if the customer information already exist
-    db.admin.findOne({
+    models.users.findOne({
       where: {
         customerEmail: req.body.customerEmail,
         customerRole: 'admin',
