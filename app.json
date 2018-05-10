@@ -1,0 +1,8 @@
+{
+  "name": "Book-A-Meal-App",
+  "description": "An application that allows customers to make food orders and helps the food vendor provide and know what the customers want to eat.",
+  "repository": "https://github.com/yomigeek/book-a-meal-app/",
+  "logo": "",
+  "keywords": ["node", "express", "heroku", "book-a-meal-app"],
+  "image": ""
+}

@@ -7,7 +7,8 @@
     "test": "set NODE_ENV=test&&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/testApp.js --exit",
     "build": "rimraf dist/ ",
     "start": "npm run build && node dist/app.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "heroku-postbuild": "sequelize db:migrate"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
