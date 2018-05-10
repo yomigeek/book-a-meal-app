@@ -2,7 +2,7 @@ import models from '../models';
 
 class MealsController {
   static allMeals(req, res) {
-    models.meals.findAll({
+    models.meals.findOne({
       where: {
         userId: req.decoded.myCustomerId,
       },
@@ -19,7 +19,7 @@ class MealsController {
   }
 
   static addAMeal(req, res) {
-    models.meals.findAll({
+    models.meals.findOne({
       where: {
         userId: req.decoded.myCustomerId,
         mealName: req.body.mealName,
@@ -56,7 +56,7 @@ class MealsController {
 
 
   static getMealById(req, res) {
-    models.meals.findAll({
+    models.meals.findOne({
       where: {
         userId: req.decoded.myCustomerId,
         id: req.params.mealId,
