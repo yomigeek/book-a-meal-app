@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import config from '../config';
 import models from '../models';
