@@ -1,8 +1,0 @@
-sudo: false
-language: node_js
-node_js:
-  - 'node'
-  - 'stable'
-  - '6'
-  - '5'
-  - '4'

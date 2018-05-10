@@ -3,9 +3,6 @@ language: node_js
 node_js:
   - "node"
   - "8"
-env:
-  global:
-    - CC_TEST_REPORTER_ID=3f728c886049c98267001b90d0e53134d9f2d3261c7945af279694d90619a9a1
 before_install: 
   - cd server
 before_script:
@@ -14,13 +11,15 @@ before_script:
   - npm install mocha-lcov-reporter --save-dev
   - npm install supertest 
   - yarn global add nyc
+  -chdmod 0777 ./node_modules/.bin/mocha
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
+  - node app.js
   - npm test
   - nyc --reporter=lcov yarn run test
-  
+
 after_success:
   - npm run coveralls
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
