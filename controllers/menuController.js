@@ -19,11 +19,11 @@ class MenuController {
         }
         models.allMeals.findOne({
           where: {
-            mealId: allMenuData.mealId.toString(),
+            mealId: allMenuData.mealId,
           },
         }).then((mealsData) => {
           const finalData = {
-            menuId: allMenuData.menuId.toString(),
+            menuId: allMenuData.menuId,
             mealsData,
 
           };
