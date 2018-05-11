@@ -4,7 +4,7 @@ class MealsController {
   static allMeals(req, res) {
     models.allMeals.findOne({
       where: {
-        userId: req.decoded.myCustomerId,
+        userId: req.decoded.myCustomerId.toString(),
       },
     }).then((mealList) => {
       if (mealList.length < 1) {
@@ -21,7 +21,7 @@ class MealsController {
   static addAMeal(req, res) {
     models.allMeals.findOne({
       where: {
-        userId: req.decoded.myCustomerId,
+        userId: req.decoded.myCustomerId.toString(),
         mealName: req.body.mealName,
       },
     })
