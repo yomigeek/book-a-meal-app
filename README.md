@@ -6,13 +6,18 @@
 An application that allows customers to make food orders and helps the food vendor provide and know what the customers want to eat.
 
 ## User Interface Demo
-Here is a working live demo : https://yomigeek.github.io/book-a-meal-app/UI/index.html
+A working live demo of my application user interface: https://yomigeek.github.io/book-a-meal-app/UI/index.html
 
 ## Heroku Demo
 Here is a working live demo of my API endpoints on heroku : 
 * For list of meals: https://mybookamealapp.herokuapp.com/api/v1/meals
 * For list of menu: https://mybookamealapp.herokuapp.com/api/v1/menu
 * For list of orders: https://mybookamealapp.herokuapp.com/api/v1/orders
+
+## Real-time API on Heroku
+API endpoints are hosted on heroku and can be accessed via this link: 
+* Url: https://bam-app-heroku.herokuapp.com
+
 
 ## Built with 
 HTML
