@@ -60,10 +60,11 @@ class OrderController {
   static updateOrder(req, res) {
     models.userOrders.findOne({
       where: {
-        id: req.params.orderId,
+        id: req.params.orderId.toString(),
       },
     })
       .then((data) => {
+      console.log(data)
         if (data.length <= 0) {
           return res.status(404).send({
             message: 'Oops! Order not found.',
