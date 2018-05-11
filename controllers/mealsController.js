@@ -84,10 +84,11 @@ class MealsController {
     models.allMeals.findOne({
       where: {
         userId: req.decoded.myCustomerId.toString(),
-        id: req.params.mealId,
+        id: req.params.mealId.toString(),
       },
     })
       .then((data) => {
+      console.log(data, data.length)
         if (data.length <= 0) {
           return res.status(404).send({
             message: 'Oops! Meal not found or not available.',
