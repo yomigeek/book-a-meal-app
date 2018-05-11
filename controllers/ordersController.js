@@ -65,7 +65,7 @@ class OrderController {
     })
       .then((data) => {
       console.log(data)
-        if (data.length <= 0) {
+        if (!data) {
           return res.status(404).send({
             message: 'Oops! Order not found.',
           });
