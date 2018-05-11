@@ -64,7 +64,7 @@ class MealsController {
       },
     })
       .then((data) => {
-        if (data.length <= 0) {
+        if (!data) {
           return res.status(404).send({
             message: 'Oops! Meal not found or not available.',
           });
