@@ -17,13 +17,13 @@ class MenuController {
             message: 'No Meal exist in today menu!',
           });
         }
-        models.allMeals.findAll({
+        models.allMeals.findOne({
           where: {
-            mealId: allMenuData.mealId,
+            mealId: allMenuData.mealId.toString(),
           },
         }).then((mealsData) => {
           const finalData = {
-            menuId: allMenuData.menuId,
+            menuId: allMenuData.menuId.toString(),
             mealsData,
 
           };
