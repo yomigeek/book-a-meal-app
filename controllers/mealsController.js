@@ -27,7 +27,7 @@ class MealsController {
     })
       .then((data) => {
       console.log(data, data.length);
-        if (data.length < 1) {
+        if (data.length >= 1) {
           return res.status(409).send({
             message: 'This Meal already exist for this user!',
           });
