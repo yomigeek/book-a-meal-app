@@ -36,11 +36,14 @@ class VendorController {
           }).save();
           return res.status(201).send({
             message: 'Account has been created successfully!',
+            customerName: req.body.customerName,
+            customerEmail: req.body.customerEmail,
+            
           });
         }
       })
       .catch(err => res.status(404).send({
-        message: 'Proccess aborted in vendor',
+        message: 'Proccess aborted in vendor controller',
       }));
   }
 
