@@ -11,7 +11,6 @@ class MenuController {
       },
     })
       .then((allMenuData) => {
-      console.log(allMenuData[0].dataValues);
       if (allMenuData.length <= 0) {
           return res.status(404).send({
             message: 'No Meal exist in today menu!',
