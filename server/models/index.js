@@ -1,37 +1,36 @@
-const Sequelize = require('sequelize');
+import { readdirSync } from 'fs';
+import { basename as _basename, join } from 'path';
+import Sequelize from 'sequelize';
 
+const basename = _basename(__filename);
 const env = process.env.NODE_ENV || 'development';
+const config = require('../config/config.json')[env];
 
-const config = require('../config/config')[env];
-  
-require('dotenv').config();
-
-
-// Connect all the models/tables in the database to a db object,
-// so everything is accessible via one object
 const db = {};
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, config);
+let sequelize;
 
-db.Sequelize = Sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+
+readdirSync(__dirname)
+  .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
+  .forEach((file) => {
+    const model = sequelize.import(join(__dirname, file));
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
 db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-// Models/tables
-db.meals = require('../models/allMeals')(sequelize, Sequelize);
-db.admin = require('../models/userCustomers')(sequelize, Sequelize);
-db.menu = require('../models/menu')(sequelize, Sequelize);
-db.orders = require('../models/orders')(sequelize, Sequelize);
-// Relations
-db.admin.hasMany(db.meals);
-db.meals.belongsTo(db.admin);
-db.meals.belongsTo(db.menu, {
-  foreignKey: 'mealId',
-});
-db.menu.hasMany(db.meals, {
-  foreignKey: 'mealId',
-});
-db.meals.belongsToMany(db.menu, {
-  through: 'mealId',
-});
 
-module.exports = db;
+export default db;
