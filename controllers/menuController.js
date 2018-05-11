@@ -11,9 +11,7 @@ class MenuController {
       },
     })
       .then((allMenuData) => {
-      console.log(allMenuData[0]);
-      console.log(allMenuData[1]);
-
+      console.log(allMenuData[0].dataValues);
       if (allMenuData.length <= 0) {
           return res.status(404).send({
             message: 'No Meal exist in today menu!',
@@ -21,11 +19,11 @@ class MenuController {
         }
         models.allMeals.findOne({
           where: {
-            mealId: allMenuData.dataValues.mealId,
+            mealId: allMenuData[0].dataValues.mealId,
           },
         }).then((mealsData) => {
           const finalData = {
-            menuId: allMenuData.dataValues.menuId,
+            menuId: allMenuData[0].dataValues.menuId,
             mealsData,
 
           };
