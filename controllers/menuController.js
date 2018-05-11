@@ -40,7 +40,7 @@ class MenuController {
     const randomSystemId = Math.random().toString(36).slice(-5);
     models.allMeals.findAll({
       where: {
-        id: req.body.mealId,
+        id: req.body.mealId.toString(),
       },
     })
       .then((data) => {
@@ -52,7 +52,7 @@ class MenuController {
       
         models.userMenus.findOne({
           where: {
-            mealId: req.body.mealId,
+            mealId: req.body.mealId.toString(),
           },
         }).then((menuData) => {
           // If meal doesn't exist in the menu, add to the specfic day menu
