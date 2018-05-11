@@ -59,7 +59,7 @@ class MealsController {
   static getMealById(req, res) {
     models.allMeals.findOne({
       where: {
-        userId: req.decoded.myCustomerId,
+        userId: req.decoded.myCustomerId.toString(),
         id: req.params.mealId,
       },
     })
@@ -83,7 +83,7 @@ class MealsController {
   static updateAMeal(req, res) {
     models.allMeals.findOne({
       where: {
-        userId: req.decoded.myCustomerId,
+        userId: req.decoded.myCustomerId.toString(),
         id: req.params.mealId,
       },
     })
@@ -118,7 +118,7 @@ class MealsController {
   static deleteMeal(req, res) {
     models.allMeals.findAll({
       where: {
-        userId: req.decoded.myCustomerId,
+        userId: req.decoded.myCustomerId.toString(),
         id: req.params.mealId,
       },
     })
