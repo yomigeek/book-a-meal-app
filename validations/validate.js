@@ -103,6 +103,20 @@ class Validate {
       });
     } next();
   }
+  
+    static addMealToMenu(req, res, next) {
+    if (!req.body.mealId) {
+      return res.send({
+        message: 'MealId cannot be empty!',
+      });
+    }
+    if (typeof (req.body.mealId) === 'string') {
+      return res.status(400).send({
+        message: 'Meal id cannot be a string type. Must be a number!',
+      });
+    } next();
+  }
+  
   static updateOrder(req, res, next) {
     if (!req.body.quantity) {
       return res.send({
