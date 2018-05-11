@@ -66,11 +66,10 @@ class Validate {
       return res.status(400).send({
         message: 'Please upload a photo for the meal!',
       });
-      else if (typeof (req.body.mealPrice) === 'string') {
+    } else if (typeof (req.body.mealPrice) === 'string') {
       return res.status(400).send({
         message: 'Meal price cannot be a string type. Must be a number!',
       });
-    }
     } next();
   }
 
