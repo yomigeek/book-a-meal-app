@@ -8,8 +8,6 @@ import verifyToken from '../auth';
 import Validate from '../validations/validate';
 import CheckRole from '../validations/checkRole';
 
-// Declare a localStorage for storing JWT tokens
-
 const router = express.Router();
 
 
@@ -29,7 +27,7 @@ router.put('/api/v1/meals/:mealId', verifyToken, CheckRole.checkAdmin, MealContr
 router.delete('/api/v1/meals/:mealId', verifyToken, CheckRole.checkAdmin, MealController.deleteMeal);
 
 // Menu API Routes
-router.post('/api/v1/menu', verifyToken, CheckRole.checkAdmin, MenuController.addToMenu);
+router.post('/api/v1/menu', verifyToken, CheckRole.checkAdmin, Validate.addMealToMenu, MenuController.addToMenu);
 router.get('/api/v1/menu/', verifyToken, MenuController.menuForTheDay);
 
 // Orders API Routes
