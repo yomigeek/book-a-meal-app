@@ -49,8 +49,8 @@ class MenuController {
             message: 'No Meal with this id exist!',
           });
         }
-        // create customer information
-        models.menu.findOne({
+      
+        models.userMenus.findOne({
           where: {
             mealId: req.body.mealId,
           },
@@ -59,7 +59,7 @@ class MenuController {
           if (!menuData) {
             const myDate = new Date();
             const todaysDate = myDate.toISOString().slice(0, 10);
-            models.menu.build({
+            models.userMenus.build({
               id: req.body.mealId,
               menuId: randomSystemId,
               mealId: req.body.mealId,
@@ -84,7 +84,7 @@ class MenuController {
               message: 'Meal Already added to todays menu!',
             });
           }
-          models.menu.build({
+          models.userMenus.build({
             id: req.body.mealId,
             menuId: randomSystemId,
             mealId: req.body.mealId,
