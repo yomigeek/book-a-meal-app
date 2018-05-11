@@ -81,7 +81,7 @@ class MealsController {
   }
 
   static updateAMeal(req, res) {
-    models.allMeals.findOne({
+    models.allMeals.findAll({
       where: {
         userId: req.decoded.myCustomerId.toString(),
         id: req.params.mealId.toString(),
