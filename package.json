@@ -13,7 +13,7 @@
     "babel-node": "babel-node --presets=es2015",
     "start:dev": "nodemon --exec npm run babel-node -- app.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "heroku-postbuild": "sequelize db:migrate"
+    "heroku-postbuild": "sequelize db:migrate undo all"
     
   },
   "dependencies": {
