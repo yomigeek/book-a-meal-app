@@ -1,17 +1,17 @@
-import db from '../db/myDb';
+import models from '../models';
 
 class MenuController {
   // Static function for checking the menu for the day
   static menuForTheDay(req, res) {
     const currentDate = new Date();
     const formattedTodaysDate = currentDate.toISOString().slice(0, 10);
-    db.menu.findOne({
+    models.menu.findOne({
       where: {
         formattedDate: formattedTodaysDate,
       },
     })
       .then((allMenuData) => {
-        db.meals.findAll({
+        models.allMeals.findAll({
           where: {
             mealId: allMenuData.mealId,
           },
@@ -21,7 +21,8 @@ class MenuController {
             mealsData,
 
           };
-          return res.status(409).send({
+          return res.status(201).send({
+            message: 'success',
             finalData,
           });
         });
@@ -31,7 +32,7 @@ class MenuController {
   // Static function to add meals to the specific day menu
   static addToMenu(req, res) {
     const randomSystemId = Math.random().toString(36).slice(-5);
-    db.meals.findAll({
+    models.allMeals.findAll({
       where: {
         id: req.body.mealId,
       },
@@ -43,7 +44,7 @@ class MenuController {
           });
         }
         // create customer information
-        db.menu.findOne({
+        models.menu.findOne({
           where: {
             mealId: req.body.mealId,
           },
@@ -52,7 +53,7 @@ class MenuController {
           if (!menuData) {
             const myDate = new Date();
             const todaysDate = myDate.toISOString().slice(0, 10);
-            db.menu.build({
+            models.menu.build({
               id: req.body.mealId,
               menuId: randomSystemId,
               mealId: req.body.mealId,
@@ -77,7 +78,7 @@ class MenuController {
               message: 'Meal Already added to todays menu!',
             });
           }
-          db.menu.build({
+          models.menu.build({
             id: req.body.mealId,
             menuId: randomSystemId,
             mealId: req.body.mealId,
