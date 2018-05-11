@@ -2,12 +2,12 @@ import models from '../models';
 
 class MealsController {
   static allMeals(req, res) {
-    models.allMeals.findOne({
+    models.allMeals.findAll({
       where: {
         userId: req.decoded.myCustomerId.toString(),
       },
     }).then((mealList) => {
-      if (mealList.length < 1) {
+      if (!mealList) {
         return res.status(404).send({
           message: 'No Meal found for this user!',
         });
