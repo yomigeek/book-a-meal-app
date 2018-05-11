@@ -19,7 +19,7 @@ class MealsController {
   }
 
   static addAMeal(req, res) {
-    models.allMeals.findOne({
+    models.allMeals.findAll({
       where: {
         userId: req.decoded.myCustomerId.toString(),
         mealName: req.body.mealName,
