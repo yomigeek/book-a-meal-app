@@ -1,11 +1,11 @@
 import models from '../models';
 
 class MenuController {
-  // Static function for checking the menu for the day
+  // Static function for getting the menu for the day
   static menuForTheDay(req, res) {
     const currentDate = new Date();
     const formattedTodaysDate = currentDate.toISOString().slice(0, 10);
-    models.menu.findOne({
+    models.userMenus.findAll({
       where: {
         formattedDate: formattedTodaysDate,
       },
@@ -21,7 +21,7 @@ class MenuController {
             mealsData,
 
           };
-          return res.status(201).send({
+          return res.status(200).send({
             message: 'success',
             finalData,
           });
