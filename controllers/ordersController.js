@@ -1,9 +1,8 @@
-import db from '../db/myDb';
 import models from '../models';
 
 class OrderController {
   static allOrders(req, res) {
-    db.orders.findAll({
+    models.userOrders.findAll({
       where: {
         adminId: req.decoded.myCustomerId,
       },
@@ -41,7 +40,7 @@ class OrderController {
             const myDate = new Date();
             const todaysDate = myDate.toISOString().slice(0, 10);
             const orderSystemId = Math.floor(Math.random() * 20000);
-            db.orders.build({
+            models.userOrders.build({
               id: orderSystemId,
               orderId: orderSystemId,
               quantity: req.body.quantity,
@@ -59,7 +58,7 @@ class OrderController {
   }
 
   static updateOrder(req, res) {
-    db.orders.findOne({
+    models.userOrders.findOne({
       where: {
         id: req.params.orderId,
       },
@@ -75,11 +74,11 @@ class OrderController {
         const orderDate = data.dataValues.createdAt.getHours();
         const dateDifference = todaysDate - orderDate;
         if (dateDifference > 2) {
-          return res.status(404).send({
+          return res.status(400).send({
             message: 'Oops! The duration for modifing the orders has passed.',
           });
         }
-        db.orders.update({
+        models.userOrders.update({
           quantity: req.body.quantity,
 
         }, {
