@@ -11,6 +11,12 @@ class MenuController {
       },
     })
       .then((allMenuData) => {
+      console.log(allMenuData);
+        if (allMenuData.length <= 0) {
+          return res.status(404).send({
+            message: 'No Meal exist in today menu!',
+          });
+        }
         models.allMeals.findAll({
           where: {
             mealId: allMenuData.mealId,
