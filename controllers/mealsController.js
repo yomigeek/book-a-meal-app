@@ -7,7 +7,7 @@ class MealsController {
         userId: req.decoded.myCustomerId.toString(),
       },
     }).then((mealList) => {
-      if (!mealList) {
+      if (mealList.length < 1) {
         return res.status(404).send({
           message: 'No Meal found for this user!',
         });
@@ -26,7 +26,7 @@ class MealsController {
       },
     })
       .then((data) => {
-        if (data.length > 0) {
+        if (!data) {
           return res.status(409).send({
             message: 'Meal already exist for this user!',
           });
